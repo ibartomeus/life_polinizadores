@@ -1,0 +1,24 @@
+---
+title: "Untitled"
+author: "I. Bartomeus, J. Barragán, O. Aguado, E. Nuñez"
+date: "11/21/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Jose, este documento ha de: 
+
+1) Introducir objetivos (Nacho)
+
+2) Metodologia de campo (Adaptada del documento adjunto)
+
+2) Cargar y limpiar datos (Jose)
+
+3) Analizar y visualizar de forma reproducible las dos parcelas siguiendo, por ejemplo, estos codigos: https://ibartomeus.github.io/hab-sp_ntw/demo.html (Jose y Nacho)
+
+
+
