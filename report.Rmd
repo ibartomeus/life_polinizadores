@@ -1,22 +1,102 @@
 ---
-title: "Untitled"
-author: "I. Bartomeus, J. Barragán, O. Aguado, E. Nuñez"
+title: "Life PollinAction"
+author: "I. Bartomeus, J. B. Lanuza, O. Aguado, E. Nuñez"
 date: "11/21/2021"
-output: html_document
+output:
+  html_document:
+    self_contained: yes
+    mode: selfcontained
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, echo=FALSE}
+# set global chunk options: 
+library(knitr)
+opts_chunk$set(cache=TRUE, autodep = TRUE)
+dep_auto()
+```
+
+## Objectives
+
+## Field sampling
+
+Two distinct locations are being monitored with different historical land-use and management in the province of Aragón (Spain): Ejea de los Caballeros (42º 01' 06" N, 1º 08' 53" W) at 350m above sea level with a total of 21 plots and Cantavieja (40º 30' 44", N 0º 22' 59" W) at 1450m with a total of 30 plots. Plot size is 2m by 2m and they are distributed randomly within each location (see Figure x). 
+
+
+```{r echo=FALSE, out.width='50%', fig.cap="Figure 1."}
+
+knitr::include_graphics('Cantavieja.png')
+
 ```
 
 
-Jose, este documento ha de: 
+## Data preparation
 
-1) Introducir objetivos (Nacho)
+```{r, warning=FALSE,message=FALSE}
 
-2) Metodologia de campo (Adaptada del documento adjunto)
+#Data processing and preparation for visualization and analysis
 
-2) Cargar y limpiar datos (Jose)
+#First,load libraries
+library(dplyr)
+library(reshape2)
+library(bipartite)
+
+#Read data
+data <- read.csv("life_polinizadores.csv")
+
+#check structure of the data
+#str(data)
+
+#create separate datasets for the two different locations
+ejea <- data %>% filter(site_id=="ejea caballeros")
+canta <- data %>% filter(site_id=="cantavieja")
+
+#select for now plant and pollinator species to create plant-pollinator networks from transects
+ejea_species <- ejea %>% select(c("plants", "pollinators"))
+canta_species <- canta %>% select(c("plants", "pollinators"))
+
+#Now aggregate pollinator visits per plant species
+ejea_aggreagted <-  ejea_species %>% count(plants, pollinators, sort = TRUE)
+canta_aggreagted <- canta_species %>% count(plants, pollinators, sort = TRUE)
+
+#Now convert to a matrix with the help of acast function from reshape library
+ejea_matrix <- acast(ejea_aggreagted, plants~pollinators, value.var="n")
+canta_matrix <- acast(canta_aggreagted, plants~pollinators, value.var="n")
+
+#Convert NA's to zeros
+ejea_matrix[is.na(ejea_matrix)] <- 0
+canta_matrix[is.na(canta_matrix)] <- 0
+```
+
+## Data visualization
+
+### Location 1 'Ejea caballeros'
+
+```{r,warning=FALSE,message=FALSE,dpi=300}
+
+#Set species names in italic
+par(font = 3)
+
+#Plot location 1
+plotweb(sortweb(ejea_matrix, sort.order="dec"), method="normal", text.rot=90, 
+col.low = "darkolivegreen1", col.high = "darkorange",
+col.interaction="gray75",bor.col.interaction ="NA", labsize =.5)
+
+```
+
+
+### Location 2 'Cantavieja'
+
+```{r,warning=FALSE,message=FALSE,dpi=300}
+#Plot location 2
+plotweb(sortweb(canta_matrix, sort.order="dec"), method="normal", text.rot=90, col.low = "darkolivegreen1", col.high = "darkorange",col.interaction="gray75",
+bor.col.interaction ="NA", labsize =.5)
+
+```
+
+
+## Analysis of network structure
+
+
 
 3) Analizar y visualizar de forma reproducible las dos parcelas siguiendo, por ejemplo, estos codigos: https://ibartomeus.github.io/hab-sp_ntw/demo.html (Jose y Nacho)
 
