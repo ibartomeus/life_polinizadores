@@ -60,7 +60,7 @@ modules.nulls_canta <- sapply(nm_canta, computeModules)
 like.nulls_canta <- sapply(modules.nulls_canta, function(x) x@likelihood)
 praw_canta <- sum(like.nulls_canta > res_canta@likelihood) / length(like.nulls_canta)
 
-#Save because it takes quite a bit to run
+#Save modularity variables because it takes quite a bit to run
 saveRDS(res_canta, "Data/res_canta.rds")
 saveRDS(modules.nulls_canta, "Data/modules.nulls_canta.rds")
 saveRDS(like.nulls_canta, "Data/like.nulls_canta.rds")
@@ -75,30 +75,29 @@ saveRDS(praw_canta, "Data/praw_canta.rds")
 #Calculate nestedness
 #####################
 
-(obs <- networklevel(web = ejea_matrix, index = "weighted NODF"))
+(obs_ejea <- networklevel(web = ejea_matrix, index = "weighted NODF"))
 
 #To know the meaning of our nestedness value we have to compare it with a randomized version
 #of our plant-pollinator network
 #Create 1000 random versions of our network
-nm <- nullmodel(web = ejea_matrix, N=1000, method="r2d") #method 2 for quantitative networks
+nm_ejea <- nullmodel(web = ejea_matrix, N=1000, method="r2d") #method 2 for quantitative networks
 
 #Prepare data for plotting
-null <- unlist(sapply(nm, networklevel, index="weighted NODF"))
+null_ejea <- unlist(sapply(nm_ejea, networklevel, index="weighted NODF"))
 
 #Plot the distribution of nestedness of the 1000 random networks
-plot(density(null), xlim=c(min(obs, min(null)), max(obs, max(null))),
+plot(density(null_ejea), xlim=c(min(obs_ejea, min(null_ejea)), max(obs_ejea, max(null_ejea))),
      main="Comparison of observed network with null model")
 
 #Add our value of nedtedness to the plot
-abline(v=obs, col="red", lwd=2)
+abline(v=obs_ejea, col="red", lwd=2)
 
 #Calculate p-value
-praw <- sum(null>obs) / length(null)
+praw_ejea <- sum(null_ejea>obs_ejea) / length(null_ejea)
 
 #####################
 #Calculate modularity
 #####################
-
 res_ejea <- computeModules(ejea_matrix)
 
 #Plot modules
@@ -110,7 +109,7 @@ modules.nulls_ejea <- sapply(nm_ejea, computeModules)
 like.nulls_ejea <- sapply(modules.nulls_ejea, function(x) x@likelihood)
 praw_ejea <- sum(like.nulls_ejea > res_ejea@likelihood) / length(like.nulls_ejea)
 
-#Save because it takes quite a bit to run
+#Save modularity variables because it takes quite a bit to run
 saveRDS(res_ejea, "Data/res_ejea")
 saveRDS(modules.nulls_ejea, "Data/modules.nulls_ejea.rds")
 saveRDS(like.nulls_ejea, "Data/like.nulls_ejea.rds")

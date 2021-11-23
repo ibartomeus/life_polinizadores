@@ -96,7 +96,7 @@ col.interaction="gray75",bor.col.interaction ="NA", labsize =.5)
 
 ## Analysis of network structure
 
-First we evaluate nestedness, specifically weighted nestedness (NODF) as shown in xxxx and xxxx.
+First we evaluate nestedness with one of the most widely used nestedness metrics, weighted nestedness (NODF).
 
 ### Location 1 'Cantavieja'
 
@@ -122,7 +122,7 @@ abline(v=obs, col="red", lwd=2)
 
 #Calculate p-value
 praw <- sum(null>obs) / length(null)
-
+praw
 ```
 
 ### Location 2 'Ejea caballeros'
@@ -149,11 +149,10 @@ abline(v=obs, col="red", lwd=2)
 
 #Calculate p-value
 praw <- sum(null>obs) / length(null)
-
+praw
 ```
 
-
-
+Both locations have a similar nestedness to the one that is expected by chance (P value > 0.05) when 1000 simulations are considered with a reshuffle of the organization of the original networks for each location.
 
 3) Analizar y visualizar de forma reproducible las dos parcelas siguiendo, por ejemplo, estos codigos: https://ibartomeus.github.io/hab-sp_ntw/demo.html (Jose y Nacho)
 
