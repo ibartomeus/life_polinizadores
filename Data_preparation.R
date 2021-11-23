@@ -37,3 +37,19 @@ library(bipartite)
 plotweb(sortweb(ejea_matrix, sort.order="dec"), method="normal", text.rot=90, col.low = "darkolivegreen1", col.high = "darkorange",
         col.interaction="gray75",bor.col.interaction ="NA", labsize =.55)
 
+
+(obs <- networklevel(web = canta_matrix, index = "weighted NODF"))
+nm <- nullmodel(web = canta_matrix, N=1000, method="r2d")
+null <- unlist(sapply(nm, networklevel, index="weighted NODF"))
+plot(density(null), xlim=c(min(obs, min(null)), max(obs, max(null))),
+     main="comparison of observed with null model Patefield")
+abline(v=obs, col="red", lwd=2)
+
+praw <- sum(null>obs) / length(null)
+
+res <- computeModules(canta_matrix)
+plotModuleWeb(res, displayAlabels = T)
+
+modules.nulls <- sapply(nm, computeModules)
+like.nulls <- sapply(modules.nulls, function(x) x@likelihood)
+praw <- sum(like.nulls > res@likelihood) / length(like.nulls)
