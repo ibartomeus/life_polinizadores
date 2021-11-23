@@ -22,11 +22,10 @@ dep_auto()
 Two distinct locations are being monitored with different historical land-use and management in the province of Aragón (Spain): Ejea de los Caballeros (42º 01' 06" N, 1º 08' 53" W) at 350m above sea level with a total of 21 plots and Cantavieja (40º 30' 44", N 0º 22' 59" W) at 1450m with a total of 30 plots. Plot size is 2m by 2m and they are distributed randomly within each location (see Figure x). 
 
 
-```{r echo=FALSE, out.width='50%', fig.cap="Figure 1."}
+```{r echo=FALSE, out.width='90%', fig.cap="Figure 1."}
 
-knitr::include_graphics('Cantavieja.png')
+knitr::include_graphics('Sampling_sites.png')
 
-knitr::include_graphics('Ejea.png')
 
 
 ```
