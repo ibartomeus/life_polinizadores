@@ -26,6 +26,9 @@ Two distinct locations are being monitored with different historical land-use an
 
 knitr::include_graphics('Cantavieja.png')
 
+knitr::include_graphics('Ejea.png')
+
+
 ```
 
 
