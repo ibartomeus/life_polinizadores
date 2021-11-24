@@ -103,7 +103,7 @@ All analysis are conducted in @R version _4.0.5_.
 
 ### Location 1 'Cantavieja'
 
-In this network we find `r as.numeric(ntw_canta["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_canta["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is very low (connectance = `r round(as.numeric(ntw_canta["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' as estimated in @bluthgen2006 (i.e. H2) is `r ch[1]` is moderate (range 0-1). In figure 2 we can see the network representation.
+In this network we find `r as.numeric(ntw_canta["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_canta["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is very low (connectance = `r round(as.numeric(ntw_canta["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' as estimated in @bluthgen2006 (i.e. H2) is `r ch[1]` (range 0-1). In figure 2 we can see the network representation.
 
 ```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, fig.align='center', fig.cap="\\textbf{Figure 2.} Bipartie plant-pollinator network from Cantavieja location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
 
@@ -125,7 +125,7 @@ bor.col.interaction ="NA", labsize =0.3, high.lablength=0,low.lablength=0)
 
 ### Location 2 'Ejea de los caballeros'
 
-In Ejea de los caballetos, the network is composed by `r as.numeric(ntw_ejea["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_ejea["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is equally low (connectance = `r round(as.numeric(ntw_ejea["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' (i.e. H2) is `r eh[1]` is moderate (range 0-1). In figure 3 we can see the network representation.
+In Ejea de los caballetos, the network is composed by `r as.numeric(ntw_ejea["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_ejea["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is equally low (connectance = `r round(as.numeric(ntw_ejea["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' (i.e. H2) is `r eh[1]` (range 0-1). In figure 3 we can see the network representation.
 
 
 ```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, fig.align='center', fig.cap="\\textbf{Figure 3.} Bipartie plant-pollinator network from Ejea de los Caballeros location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
