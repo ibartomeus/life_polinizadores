@@ -11,31 +11,34 @@ header-includes:
 
 ---
 
-# Analytical report of plant-pollinator networks from Cantavieja and Ejea de los Caballeros
+# Report on plant-pollinator network description from Cantavieja and Ejea de los Caballeros
 
-**I. Bartomeus, J. B. Lanuza, O. Aguado, E. Nuñez**
+**Data collection: O. Aguado**  
+**Analysis: J. B. Lanuza and I. Bartomeus**  
+**Coordination: E. Nuñez**  
 
 ```{r setup, echo=FALSE, warning=FALSE}
 # set global chunk options: 
 library(knitr)
 opts_chunk$set(cache=FALSE, autodep = TRUE)
-dep_auto()
+#dep_auto()
 
 ```
 
 ## Objectives
 
-*Some text here*
+The objective of this report are to describe the current status of two plant-pollinator networks located at Cantavieja and Ejea de los Caballeros before any restoration is implemented. Understanding which plants and pollinators conform the community, as well as how they interact will allow us to characterize the baseline with wich to compare after restoration process have been conducted.  
 
 ## Field sampling
 
-Two distinct locations are being monitored with different historical land-use and management in the region of Aragón (Spain): Cantavieja (40º 30' 44", N 0º 22' 59" W) at 1450m above sea level with a total of 30 plots and Ejea de los Caballeros (42º 01' 06" N, 1º 08' 53" W) at 350m with a total of 21 plots. Plot size is 2m by 2m and they are randomly distributed within each location (see **Figure 1**). Importantly, since the start of the project vegetation has remained undisturbed without grazing or clearing.
+Two distinct locations are being monitored with different historical land-use and management in the region of Aragón (Spain): Cantavieja (40º 30' 44", N 0º 22' 59" W) at 1450m above sea level with a total of 30 plots and Ejea de los Caballeros (42º 01' 06" N, 1º 08' 53" W) at 350m. In each location, a total of 21 plots were monitored. Plot size is 2m by 2m and they are randomly distributed within each location (see **Figure 1**). Importantly, since the start of the project vegetation has remained undisturbed without grazing or clearing. 
+
+Each plot was surveyed three times at the beggining of the season, at the peack of flowering at the end of the season. In each occasion, all plant-pollinator interactions observed were documented. Pollinator specimens not identified in the field were captured and identified in the lab.
 
 
 ```{r echo=FALSE, out.width='100%', fig.cap="\\textbf{Figure 1.} Cantavieja (left) and Ejea de los Caballeros (right) locations with the different sampling plots indicated with an orange square plus the plot identifier. The position of the bee hives are shown with a white cross for both locations."}
 
 knitr::include_graphics('../Images/Sampling_sites.png')
-
 ```
 
 
@@ -75,13 +78,32 @@ ejea_matrix <- acast(ejea_aggreagted, plants~pollinators, value.var="n")
 #Convert NA's to zeros
 canta_matrix[is.na(canta_matrix)] <- 0
 ejea_matrix[is.na(ejea_matrix)] <- 0
+
+ntw_canta <- networklevel(canta_matrix, index = c("connectance", 
+                                                  "number of species",
+                                                  "robustness")) #1 super robust.
+ntw_ejea <- networklevel(ejea_matrix, index = c("connectance", 
+                                                  "number of species",
+                                                  "robustness")) #1 super robust.
+
+ch <- H2fun(canta_matrix, H2_integer=TRUE)
+ch <- format(round(ch, 2), nsmall = 2)
+ch <- as.numeric(ch) 
+
+eh <- H2fun(ejea_matrix, H2_integer=TRUE)
+eh <- format(round(eh, 2), nsmall = 2)
+eh <- as.numeric(eh) 
 ```
 
 \newpage
 
-## Data visualization
+## Network descriptions
+
+All analysis are conducted in @R version _4.0.5_. 
 
 ### Location 1 'Cantavieja'
+
+In this network we find `r as.numeric(ntw_canta["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_canta["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is very low (connectance = `r round(as.numeric(ntw_canta["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' as estimated in @bluthgen2006 (i.e. H2) is `r ch[1]` is moderate (range 0-1). In figure 2 we can see the network representation.
 
 ```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, fig.align='center', fig.cap="\\textbf{Figure 2.} Bipartie plant-pollinator network from Cantavieja location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
 
@@ -101,7 +123,10 @@ plotweb(sortweb(canta_matrix, sort.order="dec"), method="normal", text.rot=90, c
 bor.col.interaction ="NA", labsize =0.3, high.lablength=0,low.lablength=0)
 ```
 
-### Location 2 'Ejea caballeros'
+### Location 2 'Ejea de los caballeros'
+
+In Ejea de los caballetos, the network is composed by `r as.numeric(ntw_ejea["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_ejea["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is equally low (connectance = `r round(as.numeric(ntw_ejea["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' (i.e. H2) is `r eh[1]` is moderate (range 0-1). In figure 3 we can see the network representation.
+
 
 ```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, fig.align='center', fig.cap="\\textbf{Figure 3.} Bipartie plant-pollinator network from Ejea de los Caballeros location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
 
@@ -120,12 +145,13 @@ col.interaction="gray75",bor.col.interaction ="NA", labsize =0.3, high.lablength
 
 ## Analysis of network structure
 
-Two main aspects of network structure are going to be analyzed for each location: weighted nestedness (NODF) implemented in @almeida2008 and the quantitative version of modularity [@dormann2014]. To understand how nested or modular are these two networks, the resulting values are compared with nestedness and modularity values of the same networks after randomization (N=1000). In addition, the overall specialization or 'selectiveness' as estimated in @bluthgen2006 is also going to be explored. All analysis are conducted in @R version _4.0.5_. 
+Three main aspects of network structure are going to be analyzed for each location: weighted nestedness (NODF) implemented in @almeida2008, the quantitative version of modularity [@dormann2014], and the network robustness in front of perturbations @memmott2004 The first value indicates if there is a core of species strongly interacting among them, and a series of species that interact with this core, but not among them. Nested structures are common in plant-pollinator networks and are suggested to be more stable. The second value describes if sets of species are forming modules that are tightly connected. A modular structure may emerge due to phenological constraints and studing modularity is useful to identify groups of species that depend on each others. Finally, we analyze how robust are the networks to the loss of random plant species. Networks that dismantle quickly after a few species removals are less robust in front ofperturbations than networks that can mantain most pollinators despites losing a few plant species.
+
+To understand how nested or modular are these two networks, the resulting values are compared with nestedness and modularity values of the same networks after randomization (N=1000). This is done because species richness and connectance can influence those values, and hence its important to control for those.
 
 ### Location 1 'Cantavieja'
 
-```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, out.width="80%", fig.align='center',fig.cap="\\textbf{Figure 4.} Density plot of the nestedness values for the different random networks (N=1000). The red vertical line indicates the observed nestedness in Cantavieja."}
-
+```{r,echo=F,warning=FALSE,message=FALSE}
 #Calculate nestedness for cantavieja
 obs_canta <- networklevel(web = canta_matrix, index = "weighted NODF")
 
@@ -137,6 +163,14 @@ nm_canta <- nullmodel(web = canta_matrix, N=1000, method="r2d") #method 2 for qu
 #Prepare data for plotting
 null_canta <- unlist(sapply(nm_canta, networklevel, index="weighted NODF"))
 
+#Calculate p-value
+praw_canta <- sum(null_canta>obs_canta) / length(null_canta)
+```
+
+Nestedness of the plant-pollinator network from Cantavieja is similar to the one that is expected by chance (P value = `r praw_canta`). This indicates that smaller subsets of interacting species are not contained in larger subsets of interacting ones. Theoretical studies indicate that this structures may be less stable than more nested ones.
+
+```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, out.width="80%", fig.align='center',fig.cap="\\textbf{Figure 4.} Density plot of the nestedness values for the different random networks (N=1000). The red vertical line indicates the observed nestedness in Cantavieja."}
+
 #Plot the distribution of nestedness of the 1000 random networks
 plot(density(null_canta), xlim=c(min(obs_canta, min(null_canta)), max(obs_canta, max(null_canta))),
      main="Comparison of observed network with null model (Cantavieja)",cex.main=1)
@@ -144,27 +178,7 @@ plot(density(null_canta), xlim=c(min(obs_canta, min(null_canta)), max(obs_canta,
 #Add our value of nedtedness to the plot
 abline(v=obs_canta, col="red", lwd=2)
 
-#Calculate p-value
-praw_canta <- sum(null_canta>obs_canta) / length(null_canta)
 ```
-
-Nestedness of the plant-pollinator network from Cantavieja is similar to the one that is expected by chance (P value = `r praw_canta`). This indicates that smaller subsets of interacting species are not contained in larger subsets of interacting ones.
-
-```{r, echo=F,warning=FALSE,dpi=300,out.width="150%", fig.align='center',fig.cap="\\textbf{Figure 5.} Interaction modules of the plant-pollinator network from Cantavieja."}
-
-#Try to plot modularity with shorter labels
-canta_matrix_2 <- canta_matrix
-library(stringr)
-colnames(canta_matrix_2) <- word(colnames(canta_matrix_2),1,2, sep=" ")
-rownames(canta_matrix_2) <- word(rownames(canta_matrix_2),1,2, sep=" ")
-
-res_canta_2 <- computeModules(canta_matrix_2)
-
-#Plot modules
-plotModuleWeb(res_canta_2, labsize = 0.2)
-
-```
-
 
 ```{r, echo=F,warning=FALSE,dpi=300,out.width="80%"}
 
@@ -182,21 +196,31 @@ like.nulls_canta <- readRDS("../Data/like.nulls_canta.rds")
 praw_canta_mod <- sum(like.nulls_canta > res_canta@likelihood) / length(like.nulls_canta)
 ```
 
+
 Cantavieja plant-pollinator network is more modular than expected by chance (P-value = `r praw_canta_mod`). This suggest that the are subgroups or modules of species with strong connections but these modules are weakly connected. This also supports the lack of nestedness found previously.
 
-```{r, echo=F,warning=FALSE,dpi=300,out.width="80%"}
-ch <- H2fun(canta_matrix, H2_integer=TRUE)
-ch <- format(round(ch, 2), nsmall = 2)
-ch <- as.numeric(ch) 
+```{r, echo=F,warning=FALSE,dpi=300,out.width="150%", fig.align='center',fig.cap="\\textbf{Figure 5.} Interaction modules of the plant-pollinator network from Cantavieja."}
+
+#Try to plot modularity with shorter labels
+canta_matrix_2 <- canta_matrix
+library(stringr)
+colnames(canta_matrix_2) <- word(colnames(canta_matrix_2),1,2, sep=" ")
+rownames(canta_matrix_2) <- word(rownames(canta_matrix_2),1,2, sep=" ")
+
+res_canta_2 <- computeModules(canta_matrix_2)
+
+#Plot modules
+plotModuleWeb(res_canta_2, labsize = 0.2)
+
 ```
 
-The overall network specialization (H2) is `r ch[1]`. 
+
+Finally, the robustness analysis shows that Cantavieja is moderately robust to plants loss (robustness = `r as.numeric(ntw_canta["robustness.LL"])`). Values near one indicate that most pollinators can survive until almost all plants are removed, while values near zero indicate a disproportional loss of pollinators when removing a few plant species.
+
 
 ### Location 2 'Ejea de los Caballeros'
 
-
-```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, out.width="80%", fig.align='center',fig.cap="\\textbf{Figure 6.} Density plot of the nestedness values for the different random networks (N=1000). The red vertical line indicates the observed nestedness in Ejea de los Caballeros"}
-
+```{r,echo=F,warning=FALSE,message=FALSE}
 #Calculate nestedness for cantavieja
 obs_ejea <- networklevel(web = ejea_matrix, index = "weighted NODF")
 
@@ -208,35 +232,23 @@ nm_ejea <- nullmodel(web = ejea_matrix, N=1000, method="r2d") #method 2 for quan
 #Prepare data for plotting
 null_ejea <- unlist(sapply(nm_ejea, networklevel, index="weighted NODF"))
 
+#Calculate p-value
+praw_ejea <- sum(null_ejea>obs_ejea) / length(null_ejea)
+```
+
+The plant-pollinator network from Ejea de los Caballeros is also not more nested than expected by chance (P-value = `r praw_ejea`).
+
+```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, out.width="80%", fig.align='center',fig.cap="\\textbf{Figure 6.} Density plot of the nestedness values for the different random networks (N=1000). The red vertical line indicates the observed nestedness in Ejea de los Caballeros"}
+
+
 #Plot the distribution of nestedness of the 1000 random networks
 plot(density(null_ejea), xlim=c(min(obs_ejea, min(null_ejea)), max(obs_ejea, max(null_ejea))),
      main="Comparison of observed network with null model (Cantavieja)",cex.main=1)
 
 #Add our value of nedtedness to the plot
 abline(v=obs_ejea, col="red", lwd=2)
-
-#Calculate p-value
-praw_ejea <- sum(null_ejea>obs_ejea) / length(null_ejea)
 ```
 
-
-The plant-pollinator network from Ejea de los Caballeros is also non-nested (P-value = `r praw_ejea`).
-
-
-```{r, echo=F,warning=FALSE,dpi=300,out.width="150%",fig.align='center', fig.cap="\\textbf{Figure 7.} Interaction modules of the plant-pollinator network from Ejea de los Caballeros"}
-
-#Try to plot modularity with shorter labels
-ejea_matrix_2 <- ejea_matrix
-library(stringr)
-colnames(ejea_matrix_2) <- word(colnames(ejea_matrix_2),1,2, sep=" ")
-rownames(ejea_matrix_2) <- word(rownames(ejea_matrix_2),1,2, sep=" ")
-
-res_ejea_2 <- computeModules(ejea_matrix_2)
-
-#Plot modules
-plotModuleWeb(res_ejea_2, labsize = 0.2)
-
-```
 
 
 ```{r, echo=F,warning=FALSE,dpi=300,out.width="80%"}
@@ -257,13 +269,23 @@ praw_ejea_mod <- sum(like.nulls_ejea > res_ejea@likelihood) / length(like.nulls_
 
 Similar to Cantavieja, the plant-pollinator of Ejea de los Caballeros is also more modular than expected by chance (P-value = `r praw_ejea_mod`). Again, this indicates the presence of subgroups of species with strong connections but weakly connected between these subgroups or modules.
 
-```{r, echo=F,warning=FALSE,dpi=300,out.width="80%"}
-eh <- H2fun(ejea_matrix, H2_integer=TRUE)
-eh <- format(round(eh, 2), nsmall = 2)
-eh <- as.numeric(eh) 
+```{r, echo=F,warning=FALSE,dpi=300,out.width="150%",fig.align='center', fig.cap="\\textbf{Figure 7.} Interaction modules of the plant-pollinator network from Ejea de los Caballeros"}
+
+#Try to plot modularity with shorter labels
+ejea_matrix_2 <- ejea_matrix
+library(stringr)
+colnames(ejea_matrix_2) <- word(colnames(ejea_matrix_2),1,2, sep=" ")
+rownames(ejea_matrix_2) <- word(rownames(ejea_matrix_2),1,2, sep=" ")
+
+res_ejea_2 <- computeModules(ejea_matrix_2)
+
+#Plot modules
+plotModuleWeb(res_ejea_2, labsize = 0.2)
+
 ```
 
-The overall network specialization (H2) is `r eh[1]`. 
+
+Finally, the robustness analysis shows that Ejea de los caballeros is moderately robust to plants loss (robustness = `r as.numeric(ntw_ejea["robustness.LL"])`). Values near one indicate that most pollinators can survive until almost all plants are removed, while values near zero indicate a disproportional loss of pollinators when removing a few plant species.
 
 ## References
 
