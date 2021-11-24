@@ -9,7 +9,8 @@ ejea <- data %>% filter(site_id=="ejea caballeros")
 
 
 #prepare the data for igraph
-links <- canta[,c("plants", "pollinators")]
+#links <- canta[,c("plants", "pollinators")]
+links <- ejea[,c("plants", "pollinators")]
 node1 <-  data.frame(node = unique(canta[,c("plants")]),
                      attribute = NA,
                      type = "plants")
