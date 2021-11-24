@@ -44,6 +44,8 @@ abline(v=obs_canta, col="red", lwd=2)
 
 #Calculate p-value
 praw_canta <- sum(null_canta>obs_canta) / length(null_canta)
+
+
 #####################
 #Calculate modularity
 #####################

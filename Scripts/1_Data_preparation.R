@@ -5,7 +5,7 @@ library(dplyr)
 library(reshape2)
 
 #Read data
-data <- read.csv("life_polinizadores.csv")
+data <- read.csv("Data/life_polinizadores.csv")
 
 #check structure of the data
 str(data)

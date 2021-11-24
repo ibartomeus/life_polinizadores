@@ -1,1 +1,3 @@
-# life_polinizadores
+# Life PollinAction
+
+Analisis de redes plantas-polinizador.
