@@ -103,7 +103,7 @@ All analysis are conducted in @R version _4.0.5_.
 
 ### Location 1 'Cantavieja'
 
-In this network we find `r as.numeric(ntw_canta["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_canta["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is very low (connectance = `r round(as.numeric(ntw_canta["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' as estimated in @bluthgen2006 (i.e. H2) is `r ch[1]`, which indicates also that the network is rather specialised (H2 ranges between 0 and 1.0 for extreme generalization and specialization, respectively.). In **figure 2** we can see the network representation.
+In this network we find `r as.numeric(ntw_canta["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_canta["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is very low (connectance = `r round(as.numeric(ntw_canta["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' as estimated in @bluthgen2006 (i.e. H2) is `r ch[1]`, which indicates also that the network is rather specialised (H2 ranges between 0 and 1 for extreme generalization and specialization, respectively.). In **figure 2** we can see the network representation. The frequency of each plant and pollinator observed can be found in Appendix 1.
 
 ```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, fig.align='center',out.width="150%",fig.height=18,fig.width=8, fig.cap="\\textbf{Figure 2.} Bipartie plant-pollinator network from Cantavieja location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
 
@@ -128,7 +128,7 @@ plotweb(sortweb(canta_matrix, sort.order="dec"), method="normal", text.rot=90,
 
 ### Location 2 'Ejea de los caballeros'
 
-In Ejea de los caballetos, the network is composed by `r as.numeric(ntw_ejea["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_ejea["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is equally low (connectance = `r round(as.numeric(ntw_ejea["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' (i.e. H2) is `r eh[1]` (range 0-1). In figure 3 we can see the network representation.
+In Ejea de los caballeros, the network is composed by `r as.numeric(ntw_ejea["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_ejea["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is equally low (connectance = `r round(as.numeric(ntw_ejea["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' (i.e. H2) is `r eh[1]` (range 0-1). In figure 3 we can see the network representation. The frequency of each plant and pollinator observed can be found in Appendix 1. 
 
 
 ```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, fig.align='center',out.width="150%",fig.height=18,fig.width=8, fig.cap="\\textbf{Figure 3.} Bipartie plant-pollinator network from Ejea de los Caballeros location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
@@ -150,7 +150,7 @@ plotweb(sortweb(ejea_matrix, sort.order="dec"), method="normal", text.rot=90,
 
 ## Analysis of network structure
 
-Three main aspects of network structure are going to be analyzed for each location: weighted nestedness (NODF) implemented in @almeida2008, the quantitative version of modularity [@dormann2014], and the network robustness in front of perturbations @memmott2004 The first value indicates if there is a core of species strongly interacting among them, and a series of species that interact with this core, but not among them. Nested structures are common in plant-pollinator networks and are suggested to be more stable. The second value describes if sets of species are forming modules that are tightly connected. A modular structure may emerge due to phenological constraints and studing modularity is useful to identify groups of species that depend on each others. Finally, we analyze how robust are the networks to the loss of random plant species. Networks that dismantle quickly after a few species removals are less robust in front of perturbations than networks that can mantain most pollinators despites losing a few plant species.
+Three main aspects of network structure are going to be analyzed for each location: weighted nestedness (NODF) implemented in @almeida2008, the quantitative version of modularity [@dormann2014], and the network robustness in front of perturbations [@memmott2004] The first value indicates if there is a core of species strongly interacting among them, and a series of species that interact with this core, but not among them. Nested structures are common in plant-pollinator networks and are suggested to be more stable. The second value describes if sets of species are forming modules that are tightly connected. A modular structure may emerge due to phenological constraints and studing modularity is useful to identify groups of species that depend on each others. Finally, we analyze how robust are the networks to the loss of random plant species. Networks that dismantle quickly after a few species removals are less robust in front of perturbations than networks that can mantain most pollinators despites losing a few plant species.
 
 To understand how nested or modular are these two networks, the resulting values are compared with nestedness and modularity values of the same networks after randomization (N=1000). This is done because species richness and connectance can influence those values, and hence its important to control for those.
 
@@ -296,9 +296,11 @@ Finally, the robustness analysis shows that Ejea de los caballeros is moderately
 
 <div id ="refs"></div>
 
+\newpage
+
 ## Appendix
 
-```{r, echo=F,warning=FALSE,dpi=300,out.width="80%",fig.align='center'}
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, dpi=300, out.width="80%"}
 library(kableExtra) #to plot the tables
 
 #Aggreagte the number of plant occurrences
@@ -312,13 +314,13 @@ ejea_table <- ejea_species %>%
 
 #Plot table location 1
 canta_table %>%
-  kbl("latex",escape=FALSE,col.names = c("\\normalfont{Plants species}", "Frequency"),caption = "\\textbf{Table S1.} Frequencies of the different plant species in Cantavieja") %>%
+  kbl("latex",escape=FALSE,col.names = c("\\normalfont{Plants species}", "Frequency"),caption = "\\textbf{Table S1.} Frequency of observed interactions with each plant species in Cantavieja") %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "center") %>%
   column_spec(1, italic = T)
 
 #Plot table location 2
 ejea_table %>%
-  kbl("latex",escape=FALSE,col.names = c("\\normalfont{Plants species}", "Frequency"),caption = "\\textbf{Table S1.} Frequencies of the different plant species in Ejea de los Caballeros") %>%
+  kbl("latex",escape=FALSE,col.names = c("\\normalfont{Plants species}", "Frequency"),caption = "\\textbf{Table S1.} Frequency of observed interactions with each plant species in Ejea de los Caballeros") %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "center") %>%
   column_spec(1, italic = T)
 
