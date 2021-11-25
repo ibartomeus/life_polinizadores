@@ -45,6 +45,15 @@ abline(v=obs_canta, col="red", lwd=2)
 #Calculate p-value
 praw_canta <- sum(null_canta>obs_canta) / length(null_canta)
 
+library(scales)
+as.numeric(scales::pvalue(praw_canta),prefix = c("p < ", "p = ", "p > "),add_p = TRUE,accuracy = 0.05)
+
+as.numeric(scales::pvalue(praw_canta,accuracy = 0.05, decimal.mark = ".", add_p = TRUE,prefix = c("p < ", "p = ", "p > ")))
+
+p<-0.0
+pvalue(p, accuracy = .01)
+
+as.factor(pvalue(p, prefix = c("p < ", "p = ", "p > "),accuracy = .01))
 
 #####################
 #Calculate modularity

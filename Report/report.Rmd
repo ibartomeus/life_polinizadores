@@ -178,7 +178,7 @@ Nestedness of the plant-pollinator network from Cantavieja is similar to the one
 
 #Plot the distribution of nestedness of the 1000 random networks
 plot(density(null_canta), xlim=c(min(obs_canta, min(null_canta)), max(obs_canta, max(null_canta))),
-     main="Comparison of observed network with null model (Cantavieja)",cex.main=1)
+     main="Comparison of observed network with null model (Cantavieja)",cex.main=1, las=1)
 
 #Add our value of nedtedness to the plot
 abline(v=obs_canta, col="red", lwd=2)
@@ -248,7 +248,7 @@ The plant-pollinator network from Ejea de los Caballeros is also not more nested
 
 #Plot the distribution of nestedness of the 1000 random networks
 plot(density(null_ejea), xlim=c(min(obs_ejea, min(null_ejea)), max(obs_ejea, max(null_ejea))),
-     main="Comparison of observed network with null model (Cantavieja)",cex.main=1)
+     main="Comparison of observed network with null model (Cantavieja)",cex.main=1,las=1)
 
 #Add our value of nedtedness to the plot
 abline(v=obs_ejea, col="red", lwd=2)
@@ -298,3 +298,28 @@ Finally, the robustness analysis shows that Ejea de los caballeros is moderately
 
 ## Appendix
 
+```{r, echo=F,warning=FALSE,dpi=300,out.width="80%",fig.align='center'}
+library(kableExtra) #to plot the tables
+
+#Aggreagte the number of plant occurrences
+canta_table <- canta_species %>% 
+  group_by(plants) %>%
+  summarise(no_rows = length(plants)) %>% arrange(desc(no_rows)) 
+
+ejea_table <- ejea_species %>% 
+  group_by(plants) %>%
+  summarise(no_rows = length(plants)) %>% arrange(desc(no_rows)) 
+
+#Plot table location 1
+canta_table %>%
+  kbl("latex",escape=FALSE,col.names = c("\\normalfont{Plants species}", "Frequency"),caption = "\\textbf{Table S1.} Frequencies of the different plant species in Cantavieja") %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "center") %>%
+  column_spec(1, italic = T)
+
+#Plot table location 2
+ejea_table %>%
+  kbl("latex",escape=FALSE,col.names = c("\\normalfont{Plants species}", "Frequency"),caption = "\\textbf{Table S1.} Frequencies of the different plant species in Ejea de los Caballeros") %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "center") %>%
+  column_spec(1, italic = T)
+
+```
