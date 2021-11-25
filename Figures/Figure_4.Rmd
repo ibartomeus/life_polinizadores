@@ -1,0 +1,96 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+classoption: landscape
+---
+
+```{r setup, echo=FALSE, warning=FALSE}
+# set global chunk options: 
+library(knitr)
+opts_chunk$set(cache=FALSE, autodep = TRUE)
+#dep_auto()
+
+```
+
+
+```{r, echo=F, warning=FALSE,message=FALSE}
+
+#DATA PREPARATION
+
+#Data processing and preparation for visualization and analysis
+
+#First,load libraries
+library(dplyr)
+library(reshape2)
+library(bipartite)
+
+#Read data
+data <- read.csv("../Data/life_polinizadores.csv")
+
+#check structure of the data
+#str(data)
+
+#create separate datasets for the two different locations
+canta <- data %>% filter(site_id=="cantavieja")
+ejea <- data %>% filter(site_id=="ejea caballeros")
+
+#select for now plant and pollinator species to create plant-pollinator networks from transects
+canta_species <- canta %>% select(c("plants", "pollinators"))
+ejea_species <- ejea %>% select(c("plants", "pollinators"))
+
+#Now aggregate pollinator visits per plant species
+canta_aggreagted <- canta_species %>% count(plants, pollinators, sort = TRUE)
+ejea_aggreagted <-  ejea_species %>% count(plants, pollinators, sort = TRUE)
+
+#Now convert to a matrix with the help of acast function from reshape library
+canta_matrix <- acast(canta_aggreagted, plants~pollinators, value.var="n")
+ejea_matrix <- acast(ejea_aggreagted, plants~pollinators, value.var="n")
+
+#Convert NA's to zeros
+canta_matrix[is.na(canta_matrix)] <- 0
+ejea_matrix[is.na(ejea_matrix)] <- 0
+
+ntw_canta <- networklevel(canta_matrix, index = c("connectance", 
+                                                  "number of species",
+                                                  "robustness")) #1 super robust.
+ntw_ejea <- networklevel(ejea_matrix, index = c("connectance", 
+                                                  "number of species",
+                                                  "robustness")) #1 super robust.
+
+ch <- H2fun(canta_matrix, H2_integer=TRUE)
+ch <- format(round(ch, 2), nsmall = 2)
+ch <- as.numeric(ch) 
+
+eh <- H2fun(ejea_matrix, H2_integer=TRUE)
+eh <- format(round(eh, 2), nsmall = 2)
+eh <- as.numeric(eh) 
+```
+
+
+```{r,echo=F,warning=FALSE,message=FALSE}
+#Calculate nestedness for cantavieja
+obs_canta <- networklevel(web = canta_matrix, index = "weighted NODF")
+
+#To know the meaning of our nestedness value we have to compare it with a randomized version
+#of our plant-pollinator network
+#Create 1000 random versions of our network
+nm_canta <- nullmodel(web = canta_matrix, N=1000, method="r2d") #method 2 for quantitative networks
+
+#Prepare data for plotting
+null_canta <- unlist(sapply(nm_canta, networklevel, index="weighted NODF"))
+
+#Calculate p-value
+praw_canta <- sum(null_canta>obs_canta) / length(null_canta)
+```
+
+```{r,echo=F,warning=FALSE,message=FALSE, out.width="80%", fig.align='center'}
+
+#Plot the distribution of nestedness of the 1000 random networks
+plot(density(null_canta), xlim=c(min(obs_canta, min(null_canta)), max(obs_canta, max(null_canta))),
+     main="Comparison of observed network with null model (Cantavieja)",cex.main=1, las=1, xlab="")
+
+#Add our value of nedtedness to the plot
+abline(v=obs_canta, col="red", lwd=2)
+
+```

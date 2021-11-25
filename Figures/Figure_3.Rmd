@@ -1,0 +1,90 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+classoption: landscape
+---
+
+```{r setup, echo=FALSE, warning=FALSE}
+# set global chunk options: 
+library(knitr)
+opts_chunk$set(cache=FALSE, autodep = TRUE)
+#dep_auto()
+
+```
+
+
+```{r, echo=F, warning=FALSE,message=FALSE}
+
+#DATA PREPARATION
+
+#Data processing and preparation for visualization and analysis
+
+#First,load libraries
+library(dplyr)
+library(reshape2)
+library(bipartite)
+
+#Read data
+data <- read.csv("../Data/life_polinizadores.csv")
+
+#check structure of the data
+#str(data)
+
+#create separate datasets for the two different locations
+canta <- data %>% filter(site_id=="cantavieja")
+ejea <- data %>% filter(site_id=="ejea caballeros")
+
+#select for now plant and pollinator species to create plant-pollinator networks from transects
+canta_species <- canta %>% select(c("plants", "pollinators"))
+ejea_species <- ejea %>% select(c("plants", "pollinators"))
+
+#Now aggregate pollinator visits per plant species
+canta_aggreagted <- canta_species %>% count(plants, pollinators, sort = TRUE)
+ejea_aggreagted <-  ejea_species %>% count(plants, pollinators, sort = TRUE)
+
+#Now convert to a matrix with the help of acast function from reshape library
+canta_matrix <- acast(canta_aggreagted, plants~pollinators, value.var="n")
+ejea_matrix <- acast(ejea_aggreagted, plants~pollinators, value.var="n")
+
+#Convert NA's to zeros
+canta_matrix[is.na(canta_matrix)] <- 0
+ejea_matrix[is.na(ejea_matrix)] <- 0
+
+ntw_canta <- networklevel(canta_matrix, index = c("connectance", 
+                                                  "number of species",
+                                                  "robustness")) #1 super robust.
+ntw_ejea <- networklevel(ejea_matrix, index = c("connectance", 
+                                                  "number of species",
+                                                  "robustness")) #1 super robust.
+
+ch <- H2fun(canta_matrix, H2_integer=TRUE)
+ch <- format(round(ch, 2), nsmall = 2)
+ch <- as.numeric(ch) 
+
+eh <- H2fun(ejea_matrix, H2_integer=TRUE)
+eh <- format(round(eh, 2), nsmall = 2)
+eh <- as.numeric(eh) 
+```
+
+
+```{r,echo=F,warning=FALSE,message=FALSE, fig.align='center',out.width="150%",fig.height=20,fig.width=11}
+
+library(stringr)
+
+#Set species names in italic
+par(font = 3)
+
+#select just two words to avoid axes cut off
+colnames(ejea_matrix) <- word(colnames(ejea_matrix),1,2, sep=" ")
+rownames(ejea_matrix) <- word(rownames(ejea_matrix),1,2, sep=" ")
+
+
+#Plot network ejea
+plotweb(sortweb(ejea_matrix, sort.order="dec"), method="normal", text.rot=90,
+        col.low = "darkolivegreen1", col.high = "darkorange",
+        col.interaction="gray75",bor.col.interaction ="NA", labsize =.8,
+        y.lim = c(-2.5, 4))
+
+```
+

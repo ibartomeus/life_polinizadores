@@ -48,12 +48,17 @@ ejea_table_poll <- ejea_species %>%
 colnames(canta_table_poll) <- c("Pollinator species", "Frequency")
 colnames(ejea_table_poll) <- c("Pollinator species", "Frequency")
 
+#bind plantas and pollinators per location
+canta_table_all <- qpcR:::cbind.na(canta_table_poll, canta_table_plants)
+canta_table_all <- sapply(canta_table_all, as.character)
+canta_table_all[is.na(canta_table_all)] <- " "
 
-ejea_tale_all <- qpcR:::cbind.na(canta_table_poll, canta_table_plants)
-ejea_tale_all <- sapply(ejea_tale_all, as.character)
-ejea_tale_all[is.na(ejea_tale_all)] <- " "
+ejea_table_all <- qpcR:::cbind.na(ejea_table_poll, ejea_table_plants)
+ejea_table_all <- sapply(ejea_table_all, as.character)
+ejea_table_all[is.na(ejea_table_all)] <- " "
 
-ejea_tale_all %>%
-  kbl(col.names = c("\\normalfont{Pollinator species}", "Frequency","\\normalfont{Plants species}", "Frequency")) %>%
-  kable_styling(bootstrap_options = C("striped","repeat_header"), full_width = F, position = "left") %>%
-  column_spec(1, italic = T)
+
+#Write csv to export to word
+write.csv(canta_table_all, "Data/canta_table_all.csv")
+write.csv(ejea_tale_all, "Data/ejea_tale_all.csv")
+

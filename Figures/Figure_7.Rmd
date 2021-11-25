@@ -1,0 +1,26 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+classoption: landscape
+---
+
+```{r setup, echo=FALSE, warning=FALSE}
+# set global chunk options: 
+library(knitr)
+opts_chunk$set(cache=FALSE, autodep = TRUE)
+#dep_auto()
+
+```
+
+
+
+```{r, echo=F,message=FALSE,warning=FALSE,out.width="300%", fig.align='center', fig.width=12,fig.height=9}
+library(bipartite)
+par(oma=c(0,3,10,10)) 
+
+res_ejea <- readRDS("../Data/res_ejea.rds")
+
+plotModuleWeb(res_ejea, labsize = 0.6)
+
+```

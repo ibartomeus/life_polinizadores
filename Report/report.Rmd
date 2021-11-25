@@ -43,7 +43,7 @@ Two distinct locations are being monitored with different historical land-use an
 Each plot was surveyed three times at the beggining of the season, at the peak of flowering and at the end of the season. In each occasion, all plant-pollinator interactions observed were documented. Pollinator specimens not identified in the field were captured and identified in the lab.
 
 
-```{r echo=FALSE, out.width='100%', fig.cap="\\textbf{Figure 1.} Cantavieja (left) and Ejea de los Caballeros (right) locations with the different sampling plots indicated with an orange square plus the plot identifier. The position of the bee hives are shown with a white cross for both locations."}
+```{r echo=FALSE, out.width='100%', fig.cap="\\textbf{Figure 1.} Cantavieja (left) and Ejea de los Caballeros (right) locations with the different sampling plots indicated with an orange square plus the plot identifier. The position of the bee hives is shown with a white cross for both locations."}
 
 knitr::include_graphics('../Images/Sampling_sites.png')
 ```
@@ -106,7 +106,7 @@ eh <- as.numeric(eh)
 
 ## Network descriptions
 
-All analysis are conducted in @R version _4.0.5_. 
+All analyses are conducted in @R version _4.0.5_. 
 
 ### Location 1 'Cantavieja'
 
