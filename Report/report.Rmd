@@ -1,14 +1,21 @@
 ---
 output:
-  pdf_document: default
   word_document: default
+  pdf_document: default
 bibliography: ../references.bib
 header-includes:
 - \usepackage{caption}
 - \captionsetup[figure]{labelformat=empty}
 - \usepackage{float}
 - \floatplacement{figure}{H}
-
+- \usepackage[skip=3pt]{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \usepackage{setspace}
+- \usepackage{titlesec}
+- \titlespacing{\title}{0pt}{\parskip}{-\parskip}
+- \usepackage[style=apa]{biblatex}
+- \usepackage[labelformat = empty]{caption}
+- \usepackage{pdflscape}
 ---
 
 # Report on plant-pollinator network description from Cantavieja and Ejea de los Caballeros
@@ -105,7 +112,7 @@ All analysis are conducted in @R version _4.0.5_.
 
 In this network we find `r as.numeric(ntw_canta["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_canta["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is very low (connectance = `r round(as.numeric(ntw_canta["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' as estimated in @bluthgen2006 (i.e. H2) is `r ch[1]`, which indicates also that the network is rather specialised (H2 ranges between 0 and 1 for extreme generalization and specialization, respectively.). In **figure 2** we can see the network representation. The frequency of each plant and pollinator observed can be found in Appendix 1.
 
-```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, fig.align='center',out.width="150%",fig.height=18,fig.width=8, fig.cap="\\textbf{Figure 2.} Bipartie plant-pollinator network from Cantavieja location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
+```{r,echo=F,warning=FALSE,message=FALSE, fig.align='center',out.width="150%",fig.height=18,fig.width=8, fig.cap="\\textbf{Figure 2.} Bipartie plant-pollinator network from Cantavieja location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
 
 library(stringr)
 
@@ -131,7 +138,7 @@ plotweb(sortweb(canta_matrix, sort.order="dec"), method="normal", text.rot=90,
 In Ejea de los caballeros, the network is composed by `r as.numeric(ntw_ejea["number.of.species.LL"])` plant species interacting with `r as.numeric(ntw_ejea["number.of.species.HL"])` insect pollinators. Overall, its connectance (i.e. the fraction of interactions established from all posible interactions) is equally low (connectance = `r round(as.numeric(ntw_ejea["connectance"]), 2)`), indicating that most interactions are quite specialized. Indeed, the overall specialization or 'selectiveness' (i.e. H2) is `r eh[1]` (range 0-1). In figure 3 we can see the network representation. The frequency of each plant and pollinator observed can be found in Appendix 1. 
 
 
-```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, fig.align='center',out.width="150%",fig.height=18,fig.width=8, fig.cap="\\textbf{Figure 3.} Bipartie plant-pollinator network from Ejea de los Caballeros location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
+```{r,echo=F,warning=FALSE,message=FALSE, fig.align='center',out.width="150%",fig.height=18,fig.width=8, fig.cap="\\textbf{Figure 3.} Bipartie plant-pollinator network from Ejea de los Caballeros location. Pollinators are coloured in orange and plants in green. The width of the conection between plants and pollinators represent the strength of the interaction (number of links) and the width of the different nodes corresponds to the total number of links."}
 
 #select just two words to avoid axes cut off
 colnames(ejea_matrix) <- word(colnames(ejea_matrix),1,2, sep=" ")
@@ -174,18 +181,18 @@ praw_canta <- sum(null_canta>obs_canta) / length(null_canta)
 
 Nestedness of the plant-pollinator network from Cantavieja is similar to the one that is expected by chance (`r as.factor(scales::pvalue(praw_canta, prefix = c("P < ", "P = ", "P > "),accuracy = .01))`). This indicates that smaller subsets of interacting species are not contained in larger subsets of interacting ones. Theoretical studies indicate that this structures may be less stable than more nested ones.
 
-```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, out.width="80%", fig.align='center',fig.cap="\\textbf{Figure 4.} Density plot of the nestedness values for the different random networks (N=1000). The red vertical line indicates the observed nestedness in Cantavieja."}
+```{r,echo=F,warning=FALSE,message=FALSE, out.width="80%", fig.align='center',fig.cap="\\textbf{Figure 4.} Density plot of the nestedness values for the different random networks (N=1000). The red vertical line indicates the observed nestedness in Cantavieja."}
 
 #Plot the distribution of nestedness of the 1000 random networks
 plot(density(null_canta), xlim=c(min(obs_canta, min(null_canta)), max(obs_canta, max(null_canta))),
-     main="Comparison of observed network with null model (Cantavieja)",cex.main=1, las=1)
+     main="Comparison of observed network with null model (Cantavieja)",cex.main=1, las=1, xlab="")
 
 #Add our value of nedtedness to the plot
 abline(v=obs_canta, col="red", lwd=2)
 
 ```
 
-```{r, echo=F,warning=FALSE,dpi=300,out.width="80%"}
+```{r, echo=F,warning=FALSE,out.width="80%"}
 
 #Calculate modules for each random network
 #It takes quite a bit time to run
@@ -204,7 +211,7 @@ praw_canta_mod <- sum(like.nulls_canta > res_canta@likelihood) / length(like.nul
 
 Cantavieja plant-pollinator network is more modular than expected by chance (`r as.factor(scales::pvalue(praw_canta_mod, prefix = c("P < ", "P = ", "P > "),accuracy = .01))`). This suggest that the are subgroups or modules of species with strong connections but these modules are weakly connected. This also supports the lack of nestedness found previously.
 
-```{r, echo=F,warning=FALSE,dpi=300,out.width="150%", fig.align='center',fig.cap="\\textbf{Figure 5.} Interaction modules of the plant-pollinator network from Cantavieja."}
+```{r, echo=F,warning=FALSE,out.width="150%", fig.align='center',fig.cap="\\textbf{Figure 5.} Interaction modules of the plant-pollinator network from Cantavieja."}
 
 #Try to plot modularity with shorter labels
 canta_matrix_2 <- canta_matrix
@@ -243,12 +250,12 @@ praw_ejea <- sum(null_ejea>obs_ejea) / length(null_ejea)
 
 The plant-pollinator network from Ejea de los Caballeros is also not more nested than expected by chance (`r as.factor(scales::pvalue(praw_ejea, prefix = c("P < ", "P = ", "P > "),accuracy = .01))`).
 
-```{r,echo=F,warning=FALSE,message=FALSE,dpi=300, out.width="80%", fig.align='center',fig.cap="\\textbf{Figure 6.} Density plot of the nestedness values for the different random networks (N=1000). The red vertical line indicates the observed nestedness in Ejea de los Caballeros"}
+```{r,echo=F,warning=FALSE,message=FALSE, out.width="80%", fig.align='center',fig.cap="\\textbf{Figure 6.} Density plot of the nestedness values for the different random networks (N=1000). The red vertical line indicates the observed nestedness in Ejea de los Caballeros"}
 
 
 #Plot the distribution of nestedness of the 1000 random networks
 plot(density(null_ejea), xlim=c(min(obs_ejea, min(null_ejea)), max(obs_ejea, max(null_ejea))),
-     main="Comparison of observed network with null model (Cantavieja)",cex.main=1,las=1)
+     main="Comparison of observed network with null model (Cantavieja)",cex.main=1,las=1, xlab="")
 
 #Add our value of nedtedness to the plot
 abline(v=obs_ejea, col="red", lwd=2)
@@ -256,7 +263,7 @@ abline(v=obs_ejea, col="red", lwd=2)
 
 
 
-```{r, echo=F,warning=FALSE,dpi=300,out.width="80%"}
+```{r, echo=F,warning=FALSE,out.width="80%"}
 
 #Calculate modules for each random network
 #It takes quite a bit time to run
@@ -274,7 +281,7 @@ praw_ejea_mod <- sum(like.nulls_ejea > res_ejea@likelihood) / length(like.nulls_
 
 Similar to Cantavieja, the plant-pollinator of Ejea de los Caballeros is also more modular than expected by chance (`r as.factor(scales::pvalue(praw_ejea_mod, prefix = c("P < ", "P = ", "P > "),accuracy = .01))`). Again, this indicates the presence of subgroups of species with strong connections but weakly connected between these subgroups or modules.
 
-```{r, echo=F,warning=FALSE,dpi=300,out.width="150%",fig.align='center', fig.cap="\\textbf{Figure 7.} Interaction modules of the plant-pollinator network from Ejea de los Caballeros"}
+```{r, echo=F,warning=FALSE,out.width="150%",fig.align='center', fig.cap="\\textbf{Figure 7.} Interaction modules of the plant-pollinator network from Ejea de los Caballeros"}
 
 #Try to plot modularity with shorter labels
 ejea_matrix_2 <- ejea_matrix
@@ -300,28 +307,59 @@ Finally, the robustness analysis shows that Ejea de los caballeros is moderately
 
 ## Appendix
 
-```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, dpi=300, out.width="80%"}
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="80%"}
 library(kableExtra) #to plot the tables
 
+################################################
 #Aggreagte the number of plant occurrences
-canta_table <- canta_species %>% 
+################################################
+canta_table_plants <- canta_species %>%
   group_by(plants) %>%
-  summarise(no_rows = length(plants)) %>% arrange(desc(no_rows)) 
+  summarise(no_rows = length(plants)) %>% arrange(desc(no_rows))
 
-ejea_table <- ejea_species %>% 
+ejea_table_plants <- ejea_species %>%
   group_by(plants) %>%
-  summarise(no_rows = length(plants)) %>% arrange(desc(no_rows)) 
+  summarise(no_rows = length(plants)) %>% arrange(desc(no_rows))
 
-#Plot table location 1
-canta_table %>%
-  kbl("latex",escape=FALSE,col.names = c("\\normalfont{Plants species}", "Frequency"),caption = "\\textbf{Table S1.} Frequency of observed interactions with each plant species in Cantavieja") %>%
-  kable_styling(bootstrap_options = "striped", full_width = F, position = "center") %>%
-  column_spec(1, italic = T)
+#Set new colnames
+colnames(canta_table_plants) <- c("Plants species", "Frequency")
+colnames(ejea_table_plants) <- c("Plants species", "Frequency")
 
-#Plot table location 2
-ejea_table %>%
-  kbl("latex",escape=FALSE,col.names = c("\\normalfont{Plants species}", "Frequency"),caption = "\\textbf{Table S1.} Frequency of observed interactions with each plant species in Ejea de los Caballeros") %>%
-  kable_styling(bootstrap_options = "striped", full_width = F, position = "center") %>%
-  column_spec(1, italic = T)
+################################################
+#Aggreagte the number of pollinators occurrences
+################################################
+
+#Aggreagte the number of pollinator occurrences
+canta_table_poll <- canta_species %>%
+  group_by(pollinators) %>%
+  summarise(no_rows = length(pollinators)) %>% arrange(desc(no_rows))
+
+ejea_table_poll <- ejea_species %>%
+  group_by(pollinators) %>%
+  summarise(no_rows = length(pollinators)) %>% arrange(desc(no_rows))
+
+colnames(canta_table_poll) <- c("Pollinator species", "Frequency")
+colnames(ejea_table_poll) <- c("Pollinator species", "Frequency")
+
+#First Cantavieja
+canta_tale_all <- qpcR:::cbind.na(canta_table_poll, canta_table_plants)
+canta_tale_all <- sapply(canta_tale_all, as.character)
+canta_tale_all[is.na(canta_tale_all)] <- " "
+
+canta_tale_all %>%
+  kbl("latex",longtable = T,col.names = c("\\normalfont{Pollinator species}", "Frequency","\\normalfont{Plants species}", "Frequency"), escape=FALSE,caption = "\\textbf{Table S1.} Pollinator and plant frequencies in Canatavieja") %>%
+  kable_styling(latex_options = c("striped","repeat_header"), full_width = F, position = "left") %>%
+  column_spec(1, italic = T) %>% column_spec(3, italic = T)
+
+#Now Ejea
+ejea_tale_all <- qpcR:::cbind.na(ejea_table_poll, ejea_table_plants)
+ejea_tale_all <- sapply(ejea_tale_all, as.character)
+ejea_tale_all[is.na(ejea_tale_all)] <- " "
+
+ejea_tale_all %>%
+  kbl("latex",longtable = T,col.names = c("\\normalfont{Pollinator species}", "Frequency","\\normalfont{Plants species}", "Frequency"), escape=FALSE,caption = "\\textbf{Table S2.} Pollinator and plant frequencies in Ejea de los Caballeros") %>%
+  kable_styling(latex_options = c("striped","repeat_header"), full_width = F, position = "left") %>%
+  column_spec(1, italic = T) %>% column_spec(3, italic = T)
+
 
 ```

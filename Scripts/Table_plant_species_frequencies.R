@@ -20,27 +20,40 @@ ejea_species <- ejea %>% select(c("plants", "pollinators"))
 
 
 #Aggreagte the number of plant occurrences
-canta_table <- canta_species %>%
+canta_table_plants <- canta_species %>%
   group_by(plants) %>%
   summarise(no_rows = length(plants)) %>% arrange(desc(no_rows))
 
-ejea_table <- ejea_species %>%
+ejea_table_plants <- ejea_species %>%
   group_by(plants) %>%
   summarise(no_rows = length(plants)) %>% arrange(desc(no_rows))
 
 #Set new colnames
-colnames(canta_table) <- c("Plants species", "Frequency")
-colnames(ejea_table) <- c("Plants species", "Frequency")
+colnames(canta_table_plants) <- c("Plants species", "Frequency")
+colnames(ejea_table_plants) <- c("Plants species", "Frequency")
+
+################
+#Now pollinators
+################
+
+#Aggreagte the number of pollinator occurrences
+canta_table_poll <- canta_species %>%
+  group_by(pollinators) %>%
+  summarise(no_rows = length(pollinators)) %>% arrange(desc(no_rows))
+
+ejea_table_poll <- ejea_species %>%
+  group_by(pollinators) %>%
+  summarise(no_rows = length(pollinators)) %>% arrange(desc(no_rows))
+
+colnames(canta_table_poll) <- c("Pollinator species", "Frequency")
+colnames(ejea_table_poll) <- c("Pollinator species", "Frequency")
 
 
-#Plot table
-canta_table %>%
-  kbl("latex",col.names = c("\\normalfont{Plants species}", "Frequency")) %>%
-  kable_styling(bootstrap_options = "striped", full_width = F, position = "left") %>%
+ejea_tale_all <- qpcR:::cbind.na(canta_table_poll, canta_table_plants)
+ejea_tale_all <- sapply(ejea_tale_all, as.character)
+ejea_tale_all[is.na(ejea_tale_all)] <- " "
+
+ejea_tale_all %>%
+  kbl(col.names = c("\\normalfont{Pollinator species}", "Frequency","\\normalfont{Plants species}", "Frequency")) %>%
+  kable_styling(bootstrap_options = C("striped","repeat_header"), full_width = F, position = "left") %>%
   column_spec(1, italic = T)
-
-ejea_table %>%
-  kbl("latex",col.names = c("\\normalfont{Plants species}", "Frequency")) %>%
-  kable_styling(bootstrap_options = "striped", full_width = F, position = "left") %>%
-  column_spec(1, italic = T)
-
