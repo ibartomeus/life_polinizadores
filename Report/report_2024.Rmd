@@ -1,0 +1,129 @@
+---
+output:
+  pdf_document: default
+  word_document: default
+bibliography: ../references.bib
+header-includes:
+- \usepackage{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \usepackage{float}
+- \floatplacement{figure}{H}
+- \usepackage[skip=3pt]{caption}
+- \captionsetup[figure]{labelformat=empty}
+- \usepackage{setspace}
+- \usepackage{titlesec}
+- \titlespacing{\title}{0pt}{\parskip}{-\parskip}
+- \usepackage[style=apa]{biblatex}
+- \usepackage[labelformat = empty]{caption}
+- \usepackage{pdflscape}
+---
+
+# Report on plant-pollinator network description from Cantavieja and Ejea de los Caballeros
+
+**Data collection: O. Aguado**  
+**Analysis: J. B. Lanuza and I. Bartomeus**  
+**Coordination: E. Nuñez**  
+**Date: 2025**  
+
+
+```{r setup, echo=FALSE, warning=FALSE}
+# set global chunk options: 
+library(knitr)
+opts_chunk$set(cache=FALSE, autodep = TRUE)
+#dep_auto()
+
+```
+
+## Objectives
+
+The objective of this report is to describe the differences between two plant-pollinator networks located in Cantavieja and Ejea de los Caballeros before and after restoration has taken place. To evaluate the effect of restoration on plant-pollinator communities, rarefied species richness and main aspects of network structure are going to be compared across sampling years.
+
+## Field sampling
+
+Two distinct locations were monitored with different historical land-use and management in the region of Aragón (Spain): Cantavieja (40º 30' 44", N 0º 22' 59" W) at 1450m above sea level with a total of 30 plots and Ejea de los Caballeros (42º 01' 06" N, 1º 08' 53" W) at 350m. In each location, a total of 21 plots were monitored in 2021 and 2024. Plot size is 2m by 2m and they are randomly distributed within each location (see **Figure 1**). Importantly, since the start of the project vegetation has remained undisturbed without grazing or clearing. 
+
+Each plot was surveyed three times at the begining of the season, at the peak of flowering and at the end of the season. In each occasion, all plant-pollinator interactions observed were documented. Pollinator specimens not identified in the field were captured and identified in the lab.
+
+
+```{r echo=FALSE, out.width='100%', fig.cap="\\textbf{Figure 1.} Cantavieja (left) and Ejea de los Caballeros (right) locations with the different sampling plots indicated with an orange square plus the plot identifier. The position of the bee hives is shown with a white cross for both locations."}
+
+knitr::include_graphics('../Images/Sampling_sites.png')
+```
+
+
+
+
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10, fig.cap="\\textbf{Figure 2.} Rarefied species accumulation curves across sampling rounds in Cantavieja and Ejea de los Caballeros. The solid line indicates the rarefied number of species per sampling round, the dot represents the observed number of species, and the dashed line shows the extrapolated number of species if additional rounds were conducted."}
+
+library(cowplot)
+library(ggplot2)
+
+p1 = readRDS("../Data/cantavieja_sampling_curve.rds")
+p2 = readRDS("../Data/ejea_sampling_curve.rds")
+
+p1 = p1 + theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
+                axis.title = element_text(size=14),
+                axis.text = element_text(size=12))
+p2 = p2 + theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
+  axis.title = element_text(size=14),
+                axis.text = element_text(size=12))
+
+plot_grid(p1, p2)
+
+```
+
+```{r, echo=F, warning=FALSE,message=FALSE}
+
+#DATA PREPARATION
+
+#Data processing and preparation for visualization and analysis
+
+#First,load libraries
+library(dplyr)
+library(reshape2)
+library(bipartite)
+
+#Read data
+data <- read.csv("../Data/life_polinizadores_2021.csv")
+
+#check structure of the data
+#str(data)
+
+#create separate datasets for the two different locations
+canta <- data %>% filter(site_id=="cantavieja")
+ejea <- data %>% filter(site_id=="ejea caballeros")
+
+#select for now plant and pollinator species to create plant-pollinator networks from transects
+canta_species <- canta %>% select(c("plants", "pollinators"))
+ejea_species <- ejea %>% select(c("plants", "pollinators"))
+
+#Now aggregate pollinator visits per plant species
+canta_aggreagted <- canta_species %>% count(plants, pollinators, sort = TRUE)
+ejea_aggreagted <-  ejea_species %>% count(plants, pollinators, sort = TRUE)
+
+#Now convert to a matrix with the help of acast function from reshape library
+canta_matrix <- acast(canta_aggreagted, plants~pollinators, value.var="n")
+ejea_matrix <- acast(ejea_aggreagted, plants~pollinators, value.var="n")
+
+#Convert NA's to zeros
+canta_matrix[is.na(canta_matrix)] <- 0
+ejea_matrix[is.na(ejea_matrix)] <- 0
+
+ntw_canta <- networklevel(canta_matrix, index = c("connectance", 
+                                                  "number of species",
+                                                  "robustness")) #1 super robust.
+ntw_ejea <- networklevel(ejea_matrix, index = c("connectance", 
+                                                  "number of species",
+                                                  "robustness")) #1 super robust.
+
+ch <- H2fun(canta_matrix, H2_integer=TRUE)
+ch <- format(round(ch, 2), nsmall = 2)
+ch <- as.numeric(ch) 
+
+eh <- H2fun(ejea_matrix, H2_integer=TRUE)
+eh <- format(round(eh, 2), nsmall = 2)
+eh <- as.numeric(eh) 
+```
+
+\newpage
+

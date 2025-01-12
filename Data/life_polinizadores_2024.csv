@@ -1,0 +1,435 @@
+site_id,transect,day,month,year,time,weather,temperature,wind,plants,pollinators
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Prunus avium,Xylocopa violacea
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Diplotaxis erucoides,Bombylius major
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Diplotaxis erucoides,Eupeodes corollae
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Prunus avium,Nomada sp
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Taraxacum officinale,Andrena flavipes
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Cardaria draba,Empis tessellata
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Rapistrum rugosum,Tenthredo baetica
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Euphorbia falcata,Macrophya montana
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Diplotaxis erucoides,Eristalis arbustorum
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Rapistrum rugosum,Platycheirus angustatus
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Rapistrum rugosum,Eristalinus aeneus
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Rapistrum rugosum,Melanostoma sp
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Euphorbia sp,Eristalis tenax
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Cardaria draba,Polistes dominula
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Diplotaxis erucoides,Eucera nigrilabris
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Cardaria draba,Sphaerophoria scripta
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Plantago lanceolata,Polyommatus icarus
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Rapistrum rugosum,Pieris brassicae
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Calendula officinalis,Sphecodes albilabris
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Vicia sp,Anthophora plumipes
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Taraxacum officinale,Andrena flavipes
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Sonchus asper,Eucera elontatula
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Diplotaxis erucoides,Andrena flavipes
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Diplotaxis erucoides,Lasiommata maera
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Calendula officinalis,Lasioglossum marginatum
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Rapistrum rugosum,Episyrphus balteatus
+ejea caballeros,1,22,3,2024,13:00,sunny with clouds,20,none,Cardaria draba,Oedemera nobilis
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Prunus avium,Osmia cornuta
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Prunus avium,Vanessa atalanta
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Prunus avium,Andrena rosae
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Taraxacum officinale,Tomares ballus
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Cardaria draba,Paragus sp
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Cardaria draba,Oedemera nobilis
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Cardaria draba,Apis mellifera
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Rapistrum rugosum,Andrena nana 
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Rapistrum rugosum,Andrena nitida
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Rapistrum rugosum,Chrysoperla sp
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Sonchus asper,Eristalis tenax
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Taraxacum officinale,Oxythyrea funesta
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Rapistrum rugosum,Apis mellifera
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Rapistrum rugosum,Bombus terrestris
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Rapistrum rugosum,Certallum ebulinum 
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Euphorbia sp,Chloromyia formosa
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Cardaria draba,Agapanthia cardui
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Taraxacum officinale,Oedemera cf. nobilis
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Taraxacum officinale,Oedemera cf. nobilis
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Diplotaxis erucoides,Eucera nigrilabris
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Diplotaxis erucoides,Eucera nigrilabris
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Cardaria draba,Chloromyia formosa
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Plantago lanceolata,Aricia cramera
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Calendula officinalis,Lasioglossum algericolellum
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Rapistrum rugosum,Chrysotoxum intermedium
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Rapistrum rugosum,Tropinota squalida
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Calendula officinalis,Conopidae sp
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Vicia sp,Lasioglossum pauxillum
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Vicia sp,Episyrphus balteatus
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Taraxacum officinale,Lomatia sp
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Sonchus asper,Bombylius medius
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Diplotaxis erucoides,Pieris napi
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Diplotaxis erucoides,Andrena pilipes
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Diplotaxis erucoides,Andrena lagopus
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Rapistrum rugosum,Chrysis sp
+ejea caballeros,2,22,3,2024,15:00,sunny with clouds,20,mild,Cardaria draba,Oxythyrea funesta
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Picris echioides,Andrena pandosa
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Echium vulgare,Hoplitis adunca
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Taraxacum officinale,Andrena pilipes
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Cardaria draba,Empis tessellata
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Euphorbia sp,Lestica clypeata
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Diplotaxis erucoides,Seladonia gemmea
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Cardaria draba,Polistes dominula
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Diplotaxis erucoides,Lycaena phlaeas
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Diplotaxis erucoides,Eucera notata
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Cardaria draba,Oxythyrea funesta
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Taraxacum officinale,Rhagonycha fulva
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Calendula officinalis,Pseudapis diversipes
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Sonchus oleraceus,Lasioglossum villosulum
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Taraxacum officinale,Rhagonycha fulva
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Sonchus asper,Conophorus sp
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Calendula officinalis,Xylocopa violacea
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Diplotaxis erucoides,Andrena flavipes
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Picris echioides,Lasioglossum marginatum
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Cardaria draba,Oedemera nobilis
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Cardaria draba,Oedemera nobilis
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Cardaria draba,Oedemera nobilis
+ejea caballeros,1,9,5,2024,11:00,sunny with clouds,18,mild,Cirsium arvense,Iphiclides feisthamelii
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Diplotaxis erucoides,Seladonia gemmea
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Picris echioides,Lasioglossum malachurum
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Taraxacum officinale,Bombylius major
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Cardaria draba,Parageron sp
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Euphorbia sp,Rhagonycha fulva
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Euphorbia sp,Rhagonycha fulva
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Euphorbia sp,Rhagonycha fulva
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Diplotaxis erucoides,Pseudapis bispinosa
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Cardaria draba,Rhagonycha fulva
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Diplotaxis erucoides,Lycaena phlaeas
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Cardaria draba,Apis mellifera
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Cardaria draba,Apis mellifera
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Taraxacum officinale,Pararge aegeria
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Calendula officinalis,Sphecodes ruficrus
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Sonchus oleraceus,Seladonia gemmea
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Taraxacum officinale,Seladonia gemmea
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Sonchus asper,Apis mellifera
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Calendula officinalis,Ceratina cucurbitina
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Diplotaxis erucoides,Parageron sp
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Vicia sp,Andrena ovatula
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Picris echioides,Lasioglossum minutissimum
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Cardaria draba,Oedemera nobilis
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Cirsium arvense,Ceratina chalcites
+ejea caballeros,2,9,5,2024,13:30,very cloudy,26,mild,Cirsium arvense,Halictus fulvipes
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Echium vulgare,Osmia aurulenta
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Convolvulus arvensis,Lycaena phlaeas
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Convolvulus arvensis,Lasioglossum pauxillum
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Retama sphaerocarpa,Megascolia bidens
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Retama sphaerocarpa,Andrena hispania
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Taraxacum officinale,Panurginus albopilosus
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Anchusa sp,Lasioglossum malachurum
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Anchusa sp,Lasioglossum malachurum
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Malva sylvestris,Ceratina chalcites
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Crepis sp,Osmia aurulenta
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Crepis sp,Osmia aurulenta
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Medicago sativa,Amegilla quadrifasciata
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Malva sylvestris,Halictus fulvipes
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Malva sylvestris,Ceratina mocsaryi
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Malva sylvestris,Villa sp
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Anchusa sp,Anthophora bimaculata
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Taraxacum officinale,Andrena humilis
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Retama sphaerocarpa,Colletes nigricans
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Retama sphaerocarpa,Colletes cf. abeillei
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Retama sphaerocarpa,Andrena albopunctata
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Retama sphaerocarpa,Andrena albopunctata
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Retama sphaerocarpa,Andrena albopunctata
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Retama sphaerocarpa,Macroglossum stellatarum
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Medicago lupulina,Polyommatus albicans
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Medicago sativa,Amegilla quadrifasciata
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Convolvulus arvensis,Apis mellifera
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Medicago sativa,Megachile apicalis
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Convolvulus arvensis,Lasioglossum algericolellum
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Medicago sativa,Megachile ericetorum
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Medicago sativa,Megachile apicalis
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Medicago sativa,Anthophora bimaculata
+ejea caballeros,1,14,6,2024,11:00,sunny with clouds,21,strong,Crepis sp,Ammophila sp
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Echium vulgare,Lasioglossum algericolellum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Echium vulgare,Lasioglossum algericolellum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Echium vulgare,Lasioglossum algericolellum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Echium vulgare,Osmia cf. niveocincta
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Convolvulus arvensis,Lasioglossum interruptum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Convolvulus arvensis,Apis mellifera
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Convolvulus arvensis,Apis mellifera
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Lestica clypeata
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Pseudapis diversipes
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Hylaeus variegatus
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Megascolia bidens
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Megascolia bidens
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Megascolia bidens
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Megascolia bidens
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Megascolia bidens
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Megascolia bidens
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Megascolia bidens
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Polistes dominula
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Philanthus triangulum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Taraxacum officinale,Ammophila sabulosa 
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Anchusa sp,Conophorus sp
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Crepis sp,Lasioglossum laevigatum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Malva sylvestris,Oxythyrea funesta
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Malva sylvestris,Hoplitis cristatula
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Megachile ericetorum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Amegilla quadrifasciata
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Malva sylvestris,Eristalis tenax
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Silybum marianum,Anthidium manicatum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Silybum marianum,Anthidium manicatum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Anchusa sp,Amegilla quadrifasciata
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Taraxacum officinale,Lycaena phlaeas
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago lupulina,Polyommatus bellargus
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Cerceris arenaria
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Cerceris bupresticida 
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Retama sphaerocarpa,Oxybelus sp
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Megachile ericetorum
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Convolvulus arvensis,Apis mellifera
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Apis mellifera
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Megachile apicalis
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Convolvulus arvensis,Apis mellifera
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Apis mellifera
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Andrena ovatula
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Megachile apicalis
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Megachile apicalis
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Medicago sativa,Polyommatus icarus
+ejea caballeros,2,14,6,2024,13:30,sunny with clouds,26,strong,Crepis sp,Dasypoda visnaga
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Onobrychis saxatilis,Osmia niveocincta
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Melilotus officinalis,Apis mellifera
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Melilotus officinalis,Ophion cf. luteus
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Echium vulgare,Tropinota squalida
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Echium vulgare,Bombus terrestris
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Salvia officinalis,Rhodanthidium sticticum
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Salvia officinalis,Rhodanthidium sticticum
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Salvia officinalis,Rhodanthidium sticticum
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Salvia officinalis,Dolichovespula sylvestris
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Salvia officinalis,Halictus scabiosae
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Artemisia sp,Psilothrix cf. viridicoerulea
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Artemisia sp,Lasioglossum pauperatum
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Melilotus officinalis,Bombus terrestris
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Melilotus officinalis,Amblyteles armatorius
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Melilotus officinalis,Andrena flavipes
+cantavieja,1,14,6,2024,10:00,sunny,17,strong,Leontodon sp,Panurgus cephalotes
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Malva sp,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Echium vulgare,Bombus terrestris
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Salvia officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Artemisia sp,Psilothrix cf. viridicoerulea
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Melilotus officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Melilotus officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Melilotus officinalis,Apis mellifera
+cantavieja,2,14,6,2024,13:00,sunny,21,strong,Leontodon sp,Andrena humilis
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Malva sp,Hoplitis cristatula
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Onobrychis saxatilis,Osmia sp
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Melilotus officinalis,Apis mellifera
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Echium vulgare,Xylocopa violacea
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Echium vulgare,Halictus sexnotatum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Echium vulgare,Macroglossum stellatarum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Echium vulgare,Ceratina chalcites
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Melilotus officinalis,Bombus terrestris
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Onobrychis saxatilis,Anthophora plumipes
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Melilotus officinalis,Lasioglossum algericolellum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Onobrychis saxatilis,Eucera nigrilabris
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Onobrychis saxatilis,Lampides boeticus
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Salvia officinalis,Bombus sylvarum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Salvia officinalis,Bombus sylvarum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Salvia officinalis,Bombus sylvarum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Salvia officinalis,Bombus sylvarum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Salvia officinalis,Bombus sylvarum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Salvia officinalis,Bombus bohemicus
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Artemisia sp,Sphaerophoria scripta
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Artemisia sp,Eristalis tenax
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Artemisia sp,Lasioglossum pauperatum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Artemisia sp,Trichodes octopunctatus
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Melilotus officinalis,Bombus terrestris
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Artemisia sp,Stenurella melanura
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Cardaria draba,Mordellidae sp
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Cardaria draba,Exosoma lusitanicum
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Melilotus officinalis,Colletes sp
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Trifolium sp,Polyommatus icarus
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Medicago sativa,Halictus quadricinctus
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Melilotus officinalis,Osmia caerulescens
+cantavieja,1,5,7,2024,10:00,sunny,20,mild,Catananche caerulea,Panurgus sp
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Malva sp,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Malva sp,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Malva sp,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Malva sp,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Echium vulgare,Hoplitis adunca
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Echium vulgare,Bombus pascuorum
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Salvia officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Artemisia sp,Anthaxia sp
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Artemisia sp,Oedemera nobilis
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Cardaria draba,Oxythyrea funesta
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Cardaria draba,Villa sp
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Trifolium sp,Lestica clypeata
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Melilotus officinalis,Apis mellifera
+cantavieja,2,5,7,2024,13:00,sunny with clouds,29,mild,Catananche caerulea,Zygaena filipendulae
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Onobrychis saxatilis,Hoplitis adunca
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Galium aparine,Hylaeus cf. clypearis
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Vicia sativa,Andrena hispania
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Echium vulgare,Ceratina chalcites
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Echium vulgare,Hoplitis adunca
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Cirsium sp,Anthophora atroalba
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Convolvulus arvensis,Hemipenthes velutina 
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Convolvulus arvensis,Lasioglossum malachurum
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Daucus carota,Episyrphus balteatus
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Daucus carota,Syritta pipiens
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Malva neglecta,Hoplitis cristatula
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Eryngium tenue,Melanargia lachesis
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Onobrychis saxatilis,Eucera nigrilabris
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Megachile rotundata
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Salvia sp,Anthidium manicatum
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Malva neglecta,Halictus fulvipes
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Polyommatus icarus
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Lampides boeticus
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Cardaria draba,Pseudapis diversipes
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Cardaria draba,Syritta pipiens
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Pieris rapae
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Colias croceus 
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Syntarucus pirithous
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Malva neglecta,Apis mellifera
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Megachile leachella
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Onobrychis saxatilis,Hoplitis adunca
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Daucus carota,Hylaeus variabilis
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Trifolium sp,Andrena flavipes
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Malva neglecta,Scolia hirta
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Megachile rotundata
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Malva neglecta,Pandoriana pandora
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Malva neglecta,Thymelicus lineola
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Pyrgus sp
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Medicago sativa,Lampides boeticus
+cantavieja,1,23,7,2024,10:00,sunnny,20,mild,Onobrychis saxatilis,Megachile rotundata
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Galium aparine,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Galium aparine,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Galium aparine,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Vicia sativa,Bombus lapidarius
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Echium vulgare,Ceratina cucurbitina
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Echium vulgare,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Echium vulgare,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Echium vulgare,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Echium vulgare,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Cirsium sp,Megachile pilidens
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Cirsium sp,Halictus quadricinctus
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Convolvulus arvensis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Daucus carota,Lucilia sericata
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Daucus carota,Peleteria meridionalis
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Colpa sexmaculata
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Eryngium tenue,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Salvia sp,Gonepteryx rhamni
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Colias alfacariensis
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Lampides boeticus
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Cardaria draba,Graphomya maculata
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Cardaria draba,Syritta pipiens
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Artemisia sp,Trichodes octopunctatus
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Daucus carota,Gymnosoma cf. rotundatum
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Daucus carota,Stenopterus ater
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Trifolium sp,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Trifolium sp,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Malva neglecta,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Colias croceus 
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Medicago sativa,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
+cantavieja,2,23,7,2024,13:00,sunny,30,strong,Onobrychis saxatilis,Apis mellifera
