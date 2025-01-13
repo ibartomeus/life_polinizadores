@@ -126,7 +126,7 @@ p1 = ggplot(cantavieja_rarefaction, aes(x = t, y = qD, group = Year)) +
  theme_bw() +
  theme(panel.grid.minor = element_blank()) +
   coord_cartesian(expand = FALSE) +
- scale_y_continuous(limits = c(10, 150),
+ scale_y_continuous(limits = c(10, 155),
       breaks = c(50, cantavieja_observed$qD,
       cantavieja_observed$qD, 100))
 
