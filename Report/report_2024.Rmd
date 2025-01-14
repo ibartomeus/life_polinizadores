@@ -25,6 +25,12 @@ header-includes:
 **Coordination: E. Nuñez**  
 **Date: 2025**  
 
+## Index
+- **Objectives**: The goals of this report.
+- **Field Sampling**: Methods used for data collection.
+- **Species and Interactions**: Comparison of species and interactions using rarefaction and elemental descriptors.
+- **Network Descriptors and Structure**: Analysis of the structural differences between the communities.
+- **Conclusion**: Final overview based on the results.
 
 ```{r setup, echo=FALSE, warning=FALSE}
 # set global chunk options: 
@@ -36,21 +42,21 @@ opts_chunk$set(cache=FALSE, autodep = TRUE)
 
 ## Objectives
 
-The objective of this report is to describe the differences between two plant-pollinator communities located in Cantavieja and Ejea de los Caballeros before and after restoration has taken place. The effect of restoration was evaluated by comparing rarefied species richness and main aspects of network structure across sampling years.
+The objective of this report is to describe the differences between two plant-pollinator communities located in Cantavieja and Ejea de los Caballeros before and after restoration has taken place. The effect of restoration on these two plant-pollinator communities was evaluated by comparing species richness, the number of unique interactions and main aspects of network structure across sampling years.
 
-## Field sampling
+## Field Sampling
 
 Two distinct locations were monitored with different historical land-use and management in the region of Aragón (Spain): Cantavieja (40º 30' 44", N 0º 22' 59" W) at 1450m above sea level with a total of 30 plots and Ejea de los Caballeros (42º 01' 06" N, 1º 08' 53" W) at 350m. In each location, a total of 21 plots were monitored in 2021 and 2024. Plot size is 2m by 2m and they are randomly distributed within each location (see **Figure 1**). Importantly, since the start of the project vegetation has remained undisturbed without grazing or clearing. 
 
 Each plot was surveyed three times at the begining of the season, at the peak of flowering and at the end of the season. In each occasion, all plant-pollinator interactions observed were documented. Pollinator specimens not identified in the field were captured and identified in the lab.
 
 
-```{r echo=FALSE, out.width='100%', fig.cap="\\textbf{Figure 1.} Cantavieja (left) and Ejea de los Caballeros (right) locations with the different sampling plots indicated with an orange square plus the plot identifier. The position of the bee hives is shown with a white cross for both locations."}
+```{r echo=FALSE, out.width='80%',fig.align='center',fig.cap="\\textbf{Figure 1.} Cantavieja (left) and Ejea de los Caballeros (right) locations with the different sampling plots indicated with an orange square plus the plot identifier. The position of the bee hives is shown with a white cross for both locations."}
 
 knitr::include_graphics('../Images/Sampling_sites.png')
 ```
 
-## Species richness
+## Species Richness
 
 In this section, we first described the species accumulation curves per location and year. This involves using rarefaction analysis to compare fairly the number of species across sampling rounds sampling rounds. This process involves creating several species accumulation curves by randomly selecting each sampling round, and then calculating the mean of all these curves. Cantavieja and Ejea de los Caballeros consistently showed a higher number of pollinator species for the same number of sampling rounds in the year 2024. (**Figure 3**). This difference between years was particularly pronounced for Ejea de los Caballeros.
 
@@ -151,10 +157,10 @@ plot_grid(p1, p2)
 
 ```
 
-Third, the rarefied accumulation curve of unique interactions was calculated for each location and year. Note that _Apis mellifera_ was excluded, as their individuals do not directly respond to the applied restoration practices. An example of unique interaction is the visit of _Amegilla quadrifasciata_ on _Eryngium_campestre_, which was observed in both locations. Here, we observed similar patterns to the ones observed for the accumulation curve of pollinator species, where cantavieja shows little differences between years but Ejea shows notably more unique interactions between a plant and a pollinator for 2024.
+Third, the rarefied accumulation curve of unique interactions was calculated for each location and year. Note that _Apis mellifera_ was excluded, as their individuals do not directly respond to the applied restoration practices. An example of unique interaction is the visit of _Amegilla quadrifasciata_ on _Eryngium campestre_, which was observed in both locations. Here, we observed similar patterns to the ones observed for the accumulation curve of pollinator species, where Cantavieja shows little differences between years but Ejea de los Caballeros shows notably more unique interactions for the year 2024.
 
 
-```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10, fig.cap="\\textbf{Figure 4.}"}
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10, fig.cap="\\textbf{Figure 4.} Comparison of the rarefied number of unique interactions across years in Cantavieja and Ejea de los Caballeros. Note that \\textit{Apis mellifera} were excluded from this analysis."}
 
 library(cowplot)
 library(ggplot2)
@@ -173,7 +179,6 @@ plot_grid(p1, p2)
 
 
 ```
-
 
 
 ```{r, echo=F, warning=FALSE,message=FALSE}
@@ -231,3 +236,12 @@ eh <- as.numeric(eh)
 
 \newpage
 
+- Comparison of degree distributions? Larger tail may indicate a higher number of distinct species?
+
+- Connectance
+
+- Selectiveness or network specialization?
+
+## Network descriptors and structure
+
+## Conclusions
