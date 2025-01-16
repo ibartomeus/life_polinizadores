@@ -1,8 +1,13 @@
 ---
+title: "\\Large Effects of short-term restoration on plant-pollinator communities in Cantavieja and Ejea de los Caballeros"
 output:
   pdf_document: default
-  word_document: default
+  latex_engine: xelatex
 bibliography: ../references.bib
+linkcolor: Gray
+urlcolor: Gray
+fontfamily: mathpazo
+fontsize: 12pt
 header-includes:
 - \usepackage{caption}
 - \captionsetup[figure]{labelformat=empty}
@@ -11,26 +16,29 @@ header-includes:
 - \usepackage[skip=3pt]{caption}
 - \captionsetup[figure]{labelformat=empty}
 - \usepackage{setspace}
-- \usepackage{titlesec}
-- \titlespacing{\title}{0pt}{\parskip}{-\parskip}
+- \usepackage{titling}
+- \setlength{\droptitle}{-2.5cm}
 - \usepackage[style=apa]{biblatex}
 - \usepackage[labelformat = empty]{caption}
 - \usepackage{pdflscape}
 ---
 
-# Report on plant-pollinator network description from Cantavieja and Ejea de los Caballeros
+\vspace{-1.2cm}
+\textcolor{gray}{\textit{January 2025}}
+\begin{center}
+\small
+\textbf{Data collection:} O. Aguado | \textbf{Analysis:} J. B. Lanuza and I. Bartomeus | \textbf{Coordination:} E. Nuñez \\
+\end{center}
 
-**Data collection: O. Aguado**  
-**Analysis: J. B. Lanuza and I. Bartomeus**  
-**Coordination: E. Nuñez**  
-**Date: 2025**  
+# Index
 
-## Index
-- **Objectives**: The goals of this report.
-- **Field Sampling**: Methods used for data collection.
-- **Species and Interactions**: Comparison of species and interactions using rarefaction and elemental descriptors.
-- **Network Descriptors and Structure**: Analysis of the structural differences between the communities.
-- **Conclusion**: Final overview based on the results.
+- [Objectives](#objectives)
+- [Sampling method](#sampling-method)
+- [Comparative analysis](#comparative-analysis)
+  - [Species richness and interactions](#species-richness-and-interactions)
+  - [Network descriptors](#network-descriptors)
+  - [Network structure](#network-structure)
+- [Conclusions](#conclusions)
 
 ```{r setup, echo=FALSE, warning=FALSE}
 # set global chunk options: 
@@ -42,28 +50,31 @@ opts_chunk$set(cache=FALSE, autodep = TRUE)
 
 ## Objectives
 
-The objective of this report is to describe the differences between two plant-pollinator communities located in Cantavieja and Ejea de los Caballeros before and after restoration has taken place. The effect of restoration on these two plant-pollinator communities was evaluated by comparing species richness, the number of unique interactions and main aspects of network structure across sampling years.
+The objective of this report is to describe the differences between two plant-pollinator communities located in Cantavieja and Ejea de los Caballeros before and after restoration practices. In this report, we compare the two plant-pollinator communities using the following methods: 1) rarefaction analysis of the number of species and unique interactions, 2) computation of network descriptors, and 3) evaluation of general aspects of network structure. 
 
-## Field Sampling
+All data manipulation and analyses were conducted in R version 4.1.2 [@R]. 
+
+## Sampling method
 
 Two distinct locations were monitored with different historical land-use and management in the region of Aragón (Spain): Cantavieja (40º 30' 44", N 0º 22' 59" W) at 1450m above sea level with a total of 30 plots and Ejea de los Caballeros (42º 01' 06" N, 1º 08' 53" W) at 350m. In each location, a total of 21 plots were monitored in 2021 and 2024. Plot size is 2m by 2m and they are randomly distributed within each location (see **Figure 1**). Importantly, since the start of the project vegetation has remained undisturbed without grazing or clearing. 
 
 Each plot was surveyed three times at the begining of the season, at the peak of flowering and at the end of the season. In each occasion, all plant-pollinator interactions observed were documented. Pollinator specimens not identified in the field were captured and identified in the lab.
 
 
-```{r echo=FALSE, out.width='80%',fig.align='center',fig.cap="\\textbf{Figure 1.} Cantavieja (left) and Ejea de los Caballeros (right) locations with the different sampling plots indicated with an orange square plus the plot identifier. The position of the bee hives is shown with a white cross for both locations."}
+```{r echo=FALSE, out.width='80%',fig.align='center',fig.cap="\\textbf{Figure 1.} Cantavieja (left) and Ejea de los Caballeros (right) locations, with the different sampling plots indicated by an orange square along with the plot identifier. The positions of the bee hives are shown with a white cross in both locations."}
 
 knitr::include_graphics('../Images/Sampling_sites.png')
 ```
 
-## Species Richness
+## Comparative analysis
 
-In this section, we first described the species accumulation curves per location and year. This involves using rarefaction analysis to compare fairly the number of species across sampling rounds sampling rounds. This process involves creating several species accumulation curves by randomly selecting each sampling round, and then calculating the mean of all these curves. Cantavieja and Ejea de los Caballeros consistently showed a higher number of pollinator species for the same number of sampling rounds in the year 2024. (**Figure 3**). This difference between years was particularly pronounced for Ejea de los Caballeros.
+### \textcolor{gray}{1. Species Richness and Interactions}
+
+In this section, we first described the species accumulation curves per location and year. For this, we used rarefaction analysis to compare the number of observed species at equal number of sampling rounds. Thus, several species accumulation curves are created by randomly selecting each sampling round, and then calculating the mean of all these curves. Cantavieja and Ejea de los Caballeros showed a higher number of pollinator species in 2024. (**Figure 3**). However, the difference between years was only particularly pronounced for Ejea de los Caballeros.
 
 
 ```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10, fig.cap="\\textbf{Figure 2.} Rarefied species accumulation curves across sampling rounds in Cantavieja and Ejea de los Caballeros. The solid line indicates the rarefied number of species per sampling round, the dot represents the observed number of species, and the dashed line shows the extrapolated number of species if additional rounds were conducted."}
 
-library(cowplot)
 library(ggplot2)
 
 p1 = readRDS("../Data/cantavieja_sampling_curve.rds")
@@ -76,7 +87,8 @@ p2 = p2 + theme(plot.title = element_text(size=18, face= "bold"), panel.border =
   axis.title = element_text(size=14),
                 axis.text = element_text(size=12))
 
-plot_grid(p1, p2)
+library(patchwork)
+p1 + p2
 
 ```
 
@@ -150,9 +162,8 @@ ggtitle("Plants")+ theme(plot.title = element_text(size=18, face= "bold"), panel
                 axis.title = element_text(size=14),
                 axis.text = element_text(size=12))
 
-library(cowplot)
-plot_grid(p1, p2)
-
+library(patchwork)
+p1+p2
 
 
 ```
@@ -175,73 +186,256 @@ p2 = p2 + theme(plot.title = element_text(size=18, face= "bold"), panel.border =
   axis.title = element_text(size=14),
                 axis.text = element_text(size=12))
 
-plot_grid(p1, p2)
+library(patchwork)
+p1+ p2
 
 
 ```
 
 
-```{r, echo=F, warning=FALSE,message=FALSE}
+Fourth, we compared the degree distributions between the pollinator and plant communities of Cantavieja and Ejea de los Caballeros across different years. Pollinators exhibited a classical decaying distribution for ecological networks [@jordano2003], while plants had a more gradual decaying distribution. Pollinators did not show statistical differences between their distributions between years for both locations (Kruskal-Wallis _P_ > 0.05). However, plants had statistically different distributions for both locations (Kruskal-Wallis _P_ < 0.05).
 
-#DATA PREPARATION
 
-#Data processing and preparation for visualization and analysis
 
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10,fig.height=8, fig.cap="\\textbf{Figure 5.} Comparison of the pollinator and plant degree distributions for Cantavieja and Ejea de los Caballeros between years."}
+
+#Read data
+data_2021 = read.csv("../Data/life_polinizadores_2021.csv")
+data_2024 = read.csv("../Data/life_polinizadores_2024.csv")
+#Combine data
+all_data = bind_rows(data_2021, data_2024)
+#Rename ejea caballeros to only ejea
+all_data = all_data %>%
+mutate(site_id = if_else(site_id == "ejea caballeros",
+                "ejea", site_id))
+
+#Delete leading and trailing spaces in spp names
+all_data = all_data %>%
+mutate(pollinators = trimws(pollinators)) %>%
+mutate(plants = trimws(plants))
+
+#Create a site_id label with year
+#and select only cols of interest
+main_cols = all_data %>%
+mutate(locality = site_id) %>%
+mutate(date = paste(day,month,year,transect, sep = "_")) %>%
+mutate(site_id = paste0(site_id, "_" ,year)) %>%
+mutate(site_id = str_replace_all(site_id, " ", "_")) %>%
+select(locality, site_id, year, transect,  plants, pollinators) %>%
+filter(!str_detect(pollinators, " sp")) %>%
+filter(!str_detect(plants, " sp")) %>%
+mutate(locality = if_else(locality== "cantavieja", "Cantavieja", "Ejea"))
+
+#Calculate degree distributions for pollinators-----
+degree_dist = main_cols %>%
+group_by(site_id, locality, year, pollinators) %>%
+summarise(degree = n_distinct(plants))
+
+#Plot degree distributions
+p1 = degree_dist %>%
+  ggplot(aes(degree, fill = factor(year),colour = factor(year), group = year, alpha= factor(year))) +
+  geom_histogram(bins = 50, binwidth = 0.8, position = "identity") +
+  geom_density(aes(y = after_stat(count) * 0.6,colour = factor(year), group = year), alpha = .3) +
+  facet_wrap(~locality) +
+  theme_bw() +
+  labs(title = "Pollinators degree distribution",
+       x = "Degree",
+       y = "Frequency") +
+  scale_fill_manual(name = "Year",values = c("2021" = "black", "2024" = "tomato4")) +
+  scale_color_manual(name = "Year",values = c("2021" = "black", "2024" = "tomato4")) +
+  scale_alpha_manual(name = "Year",values = c("2021" = 0.8, "2024" = 0.2)) + 
+  theme(
+  plot.title = element_text(size=18, face= "bold"), 
+  axis.text = element_text(size=12),
+  panel.border = element_rect(size=1.3), 
+  strip.text = element_text(size=14, face = "bold"),
+  strip.background = element_blank()
+  )+
+coord_cartesian(expand = FALSE)
+
+#Calculate degree distributions for plants-----
+degree_dist = main_cols %>%
+group_by(site_id, locality, year, plants) %>%
+summarise(degree = n_distinct(pollinators))
+
+#Plot degree distributions
+p2 = degree_dist %>%
+  ggplot(aes(degree, fill = factor(year),colour = factor(year), group = year, alpha= factor(year))) +
+  geom_histogram(bins = 50, binwidth = 0.8, position = "identity") +
+  geom_density(aes(y = after_stat(count) * 1.5,colour = factor(year), group = year), alpha = .3) +
+  facet_wrap(~locality) +
+  theme_bw() +
+  labs(title = "Plant degree distribution",
+       x = "Degree",
+       y = "Frequency") +
+  scale_fill_manual(name = "Year",values = c("2021" = "black", "2024" = "tomato4")) +
+  scale_color_manual(name = "Year",values = c("2021" = "black", "2024" = "tomato4")) +
+  scale_alpha_manual(name = "Year",values = c("2021" = 0.8, "2024" = 0.2))  + theme(
+  plot.title = element_text(size=18, face= "bold"), 
+  axis.text = element_text(size=12),
+  panel.border = element_rect(size=1.3), 
+  strip.text = element_text(size=14, face = "bold"),
+  strip.background = element_blank())+
+coord_cartesian(expand = FALSE)
+
+
+library(patchwork)
+
+p1/p2
+
+```
+
+
+### \textcolor{gray}{2. Network descriptors}
+
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE}
+
+
+#Load r data
+#Read data from 2021 and 2024
 #First,load libraries
 library(dplyr)
 library(reshape2)
-library(bipartite)
-
+library(stringr)
+library(ggplot2)
 #Read data
-data <- read.csv("../Data/life_polinizadores_2021.csv")
+data_2021 = read.csv("../Data/life_polinizadores_2021.csv")
+data_2024 = read.csv("../Data/life_polinizadores_2024.csv")
+#Combine data
+all_data = bind_rows(data_2021, data_2024)
+#Rename ejea caballeros to only ejea
+all_data = all_data %>%
+mutate(site_id = if_else(site_id == "ejea caballeros",
+                "ejea", site_id))
 
-#check structure of the data
-#str(data)
+#Delete leading and trailing spaces in spp names
+all_data = all_data %>%
+mutate(pollinators = trimws(pollinators)) %>%
+mutate(plants = trimws(plants))
 
-#create separate datasets for the two different locations
-canta <- data %>% filter(site_id=="cantavieja")
-ejea <- data %>% filter(site_id=="ejea caballeros")
+#Create a site_id label with year
+#and select only cols of interest
+main_cols = all_data %>%
+mutate(locality = site_id) %>%
+mutate(date = paste(day,month,year,transect, sep = "_")) %>%
+mutate(site_id = paste0(site_id, "_" ,year)) %>%
+mutate(site_id = str_replace_all(site_id, " ", "_")) %>%
+select(locality, site_id, year, date, transect,  plants, pollinators)
 
-#select for now plant and pollinator species to create plant-pollinator networks from transects
-canta_species <- canta %>% select(c("plants", "pollinators"))
-ejea_species <- ejea %>% select(c("plants", "pollinators"))
+#Get number of species of plants and pollinators
+#per location and year (site_id has already year on it)
+n_spp_poll = main_cols %>%
+group_by(locality, year) %>%
+filter(!str_detect(pollinators, " sp"))  %>% 
+summarise(n_pollinators = n_distinct(pollinators))
+n_spp_plant = main_cols %>%
+group_by(locality, year) %>%
+filter(!str_detect(plants, " sp"))  %>% 
+summarise(n_plants= n_distinct(plants))
+#Bind both datasets
+n_spp = left_join(n_spp_poll, n_spp_plant)
 
-#Now aggregate pollinator visits per plant species
-canta_aggreagted <- canta_species %>% count(plants, pollinators, sort = TRUE)
-ejea_aggreagted <-  ejea_species %>% count(plants, pollinators, sort = TRUE)
+#Prepare data to laod markdown
+can_2021 = n_spp %>% 
+filter(locality == "cantavieja" & year == "2021")
+can_2024 = n_spp %>% 
+filter(locality == "cantavieja" & year == "2024")
+eje_2021 = n_spp %>% 
+filter(locality == "ejea" & year == "2021")
+eje_2024 = n_spp %>% 
+filter(locality == "ejea" & year == "2024")
 
-#Now convert to a matrix with the help of acast function from reshape library
-canta_matrix <- acast(canta_aggreagted, plants~pollinators, value.var="n")
-ejea_matrix <- acast(ejea_aggreagted, plants~pollinators, value.var="n")
+#Get total number of interactions recorded per study
+interactions = main_cols %>% 
+group_by(locality, year) %>% 
+summarise(Interactions = n())
+#Prepare data of interactions to laod markdown
+can_2021_int = interactions %>% 
+filter(locality == "cantavieja" & year == "2021")
+can_2024_int = interactions %>% 
+filter(locality == "cantavieja" & year == "2024")
+eje_2021_int = interactions %>% 
+filter(locality == "ejea" & year == "2021")
+eje_2024_int = interactions %>% 
+filter(locality == "ejea" & year == "2024")
 
-#Convert NA's to zeros
-canta_matrix[is.na(canta_matrix)] <- 0
-ejea_matrix[is.na(ejea_matrix)] <- 0
-
-ntw_canta <- networklevel(canta_matrix, index = c("connectance", 
-                                                  "number of species",
-                                                  "robustness")) #1 super robust.
-ntw_ejea <- networklevel(ejea_matrix, index = c("connectance", 
-                                                  "number of species",
-                                                  "robustness")) #1 super robust.
-
-ch <- H2fun(canta_matrix, H2_integer=TRUE)
-ch <- format(round(ch, 2), nsmall = 2)
-ch <- as.numeric(ch) 
-
-eh <- H2fun(ejea_matrix, H2_integer=TRUE)
-eh <- format(round(eh, 2), nsmall = 2)
-eh <- as.numeric(eh) 
 ```
 
-\newpage
+In this section, we describe the plant-pollinator networks by location and year and evaluate their level of spcialization (H2') and connectance using the bipartite package [@dormann2008].
 
-- Comparison of degree distributions? Larger tail may indicate a higher number of distinct species?
+**Cantavieja**
 
-- Connectance
+Cantavieja had `r can_2021$n_pollinators` pollinators and `r can_2021$n_plants` plant species in 2021 and `r can_2024$n_pollinators` pollinators and `r can_2024$n_plants` plants in 2024. The total number of recorded interactions was `r can_2021_int$Interactions` in 2021 and `r can_2024_int$Interactions` in 2024. 
 
-- Selectiveness or network specialization?
+**Ejea de los Caballeros**
 
-## Network descriptors and structure
+Ejea de los Caballeros had `r eje_2021$n_pollinators` pollinators and `r eje_2021$n_plants` plant species in 2021 and `r eje_2024$n_plants` pollinators and `r eje_2024$n_plants` plants in 2024. The total number of recorded interactions was `r eje_2021_int$Interactions` in 2021 and `r eje_2024_int$Interactions` in 2024.
+
+
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10,fig.height=4, fig.cap="\\textbf{Figure 6.} Comparison of network specialization and connectance for Cantavieja and Ejea de los Caballeros across sampling years."}
+
+library(bipartite)
+library(purrr)
+library(tidyr)
+
+matrices_list = readRDS("../Data/matrices_list.rds")
+#Compute specialization
+H2_results = map(matrices_list, H2fun, H2_integer=TRUE)
+network_h2 = bind_rows(H2_results, .id = "Site_id")
+network_h2 = network_h2 %>%
+select(Site_id, H2)
+#Compute connectance
+connectance_results = map(matrices_list, networklevel, index="connectance")
+network_connectance = bind_rows(connectance_results, .id = "Site_id")
+#Bind metric data
+metrics = left_join(network_h2,network_connectance)
+#Separate Site_id again for plotting
+for_plotting = metrics %>%
+separate(Site_id, c("site", "Year"), "_") %>%
+mutate(site = str_to_title(site)) %>%
+rename(Connectance = connectance)
+#Plot data
+p1 = for_plotting %>%
+ggplot(aes(site, H2, fill = Year), group = Year) +
+geom_col(position = "dodge", alpha=0.9) +
+scale_fill_manual(values = c("black", "tomato4")) +
+theme_bw() +
+coord_cartesian(expand = FALSE) +
+xlab(NULL) +
+ylab("Species") +
+ggtitle("Network specialization (H2')")+ theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
+                axis.title = element_text(size=14),
+                axis.text = element_text(size=12))
+
+
+p2 = for_plotting %>%
+ggplot(aes(site, Connectance, fill = Year), group = Year) +
+geom_col(position = "dodge", alpha=0.9) +
+scale_fill_manual(values = c("black", "tomato4")) +
+theme_bw() +
+coord_cartesian(expand = FALSE) +
+xlab(NULL) +
+ylab("Species") +
+ggtitle("Connectance")+ theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
+                axis.title = element_text(size=14),
+                axis.text = element_text(size=12))
+
+
+p1 + p2
+
+
+
+```
+
+
+### \textcolor{gray}{3. Network descriptors}
+
+Nestedness
+Robustness
 
 ## Conclusions
+
+
+## References
+
+
