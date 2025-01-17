@@ -116,3 +116,14 @@ plotweb(canta_matrix_2021,
         text.low.col='black',
         low.lab.dis=0 )
 
+
+#Prepare data to load markdown
+can_2021 = for_plotting %>%
+filter(site == "Cantavieja" & Year == "2021")
+can_2024 = for_plotting %>%
+filter(site == "Cantavieja" & Year == "2024")
+eje_2021 = for_plotting %>%
+filter(site == "Ejea" & Year == "2021")
+eje_2024 = for_plotting %>%
+filter(site == "Ejea" & Year == "2024")
+

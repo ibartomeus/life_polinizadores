@@ -359,17 +359,49 @@ filter(locality == "ejea" & year == "2021")
 eje_2024_int = interactions %>% 
 filter(locality == "ejea" & year == "2024")
 
+matrices_list = readRDS("../Data/matrices_list.rds")
+
+#Calculate network descriptors
+library(bipartite)
+library(purrr)
+library(tidyr)
+#Compute specialization
+H2_results = map(matrices_list, H2fun, H2_integer=TRUE)
+network_h2 = bind_rows(H2_results, .id = "Site_id")
+network_h2 = network_h2 %>%
+select(Site_id, H2)
+#Compute connectance
+connectance_results = map(matrices_list, networklevel, index="connectance")
+network_connectance = bind_rows(connectance_results, .id = "Site_id")
+#Bind metric data
+metrics = left_join(network_h2,network_connectance)
+#Separate Site_id again for plotting
+for_plotting = metrics %>%
+separate(Site_id, c("site", "Year"), "_") %>%
+mutate(site = str_to_title(site)) %>%
+rename(Connectance = connectance)
+
+#Prepare data to load markdown
+can_net_2021 = for_plotting %>%
+filter(site == "Cantavieja" & Year == "2021")
+can_net_2024 = for_plotting %>%
+filter(site == "Cantavieja" & Year == "2024")
+eje_net_2021 = for_plotting %>%
+filter(site == "Ejea" & Year == "2021")
+eje_net_2024 = for_plotting %>%
+filter(site == "Ejea" & Year == "2024")
 ```
 
-In this section, we describe the plant-pollinator networks by location and year and evaluate their level of spcialization (H2') and connectance using the bipartite package [@dormann2008].
+In this section, we describe the plant-pollinator networks by location and year and evaluate their level of specialization (H2') and connectance using the bipartite package [@dormann2008].
 
 **Cantavieja**
 
-Cantavieja had `r can_2021$n_pollinators` pollinators and `r can_2021$n_plants` plant species in 2021 and `r can_2024$n_pollinators` pollinators and `r can_2024$n_plants` plants in 2024. The total number of recorded interactions was `r can_2021_int$Interactions` in 2021 and `r can_2024_int$Interactions` in 2024. 
+Cantavieja had `r can_2021$n_pollinators` pollinators and `r can_2021$n_plants` plant species in 2021 and `r can_2024$n_pollinators` pollinators and `r can_2024$n_plants` plants in 2024. The total number of recorded interactions was `r can_2021_int$Interactions` in 2021 and `r can_2024_int$Interactions` in 2024. The level of network specialization was slightly higher in 2021 (H2' = `r round(can_net_2021$H2,2)` than in 2024 (H2' = `r round(can_net_2024$H2,2)`), while connectance was notably higher in 2024 (C = `r round(can_net_2024$Connectance,2)`) than in 2021 (C = `r round(can_net_2021$Connectance,2)`).
 
 **Ejea de los Caballeros**
 
-Ejea de los Caballeros had `r eje_2021$n_pollinators` pollinators and `r eje_2021$n_plants` plant species in 2021 and `r eje_2024$n_plants` pollinators and `r eje_2024$n_plants` plants in 2024. The total number of recorded interactions was `r eje_2021_int$Interactions` in 2021 and `r eje_2024_int$Interactions` in 2024.
+Ejea de los Caballeros had `r eje_2021$n_pollinators` pollinators and `r eje_2021$n_plants` plant species in 2021 and `r eje_2024$n_plants` pollinators and `r eje_2024$n_plants` plants in 2024. The total number of recorded interactions was `r eje_2021_int$Interactions` in 2021 and `r eje_2024_int$Interactions` in 2024.  The level of network specialization was slightly higher in 2021 (H2' = `r round(eje_net_2021$H2,2)` than in 2024 (H2' = `r round(eje_net_2024$H2,2)`), while connectance was also slightly higher in 2024 (C = `r round(eje_net_2024$Connectance,2)`) than in 2021 (C = `r round(eje_net_2021$Connectance,2)`).
+
 
 
 ```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10,fig.height=4, fig.cap="\\textbf{Figure 6.} Comparison of network specialization and connectance for Cantavieja and Ejea de los Caballeros across sampling years."}
@@ -403,7 +435,7 @@ theme_bw() +
 coord_cartesian(expand = FALSE) +
 xlab(NULL) +
 ylab("Species") +
-ggtitle("Network specialization (H2')")+ theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
+ggtitle("a) Network specialization (H2')")+ theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
                 axis.title = element_text(size=14),
                 axis.text = element_text(size=12))
 
@@ -416,7 +448,7 @@ theme_bw() +
 coord_cartesian(expand = FALSE) +
 xlab(NULL) +
 ylab("Species") +
-ggtitle("Connectance")+ theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
+ggtitle("b) Connectance")+ theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
                 axis.title = element_text(size=14),
                 axis.text = element_text(size=12))
 
