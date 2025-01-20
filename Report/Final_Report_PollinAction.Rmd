@@ -4,8 +4,8 @@ output:
   pdf_document: default
   latex_engine: xelatex
 bibliography: ../references.bib
-linkcolor: Gray
-urlcolor: Gray
+linkcolor: Black
+urlcolor: Black
 fontfamily: mathpazo
 fontsize: 12pt
 header-includes:
@@ -32,12 +32,16 @@ header-includes:
 
 # Index
 
-- [Objectives](#objectives)
-- [Sampling method](#sampling-method)
-- [Comparative analysis](#comparative-analysis)
-  - [Species richness and interactions](#species-richness-and-interactions)
-  - [Network structure](#network-structure)
-- [Conclusions](#conclusions)
+\begin{itemize}
+    \item \hyperlink{objectives}{Objectives}
+    \item \hyperlink{sampling-method}{Sampling method}
+    \item \hyperlink{comparative-analysis}{Comparative analysis}
+      \begin{itemize}
+          \item \hyperlink{species-richness-and-interactions}{Species richness and interactions}
+          \item \hyperlink{network-structure}{Network structure}
+      \end{itemize}
+    \item \hyperlink{concluding-remarks}{Conclusions}
+\end{itemize}
 
 ```{r setup, echo=FALSE, warning=FALSE}
 # set global chunk options: 
@@ -67,7 +71,7 @@ knitr::include_graphics('../Images/Sampling_sites.png')
 
 ## Comparative analysis
 
-### \textcolor{gray}{1. Species Richness and Interactions}
+### \textcolor{gray}{Species Richness and Interactions}
 
 In this section, we first described the species accumulation curves per location and year. For this, we used rarefaction analysis to compare the number of observed species at equal number of sampling rounds. Thus, several species accumulation curves are created by randomly selecting each sampling round, and then calculating the mean of all these curves. Cantavieja and Ejea de los Caballeros showed a higher number of pollinator species in 2024. (**Figure 3**). However, the difference between years was only particularly pronounced for Ejea de los Caballeros.
 
@@ -285,7 +289,7 @@ p1/p2
 ```
 
 
-### \textcolor{gray}{2. Network structure}
+### \textcolor{gray}{Network structure}
 
 ```{r echo=F, fig.align='center', message=FALSE, warning=FALSE}
 
@@ -578,7 +582,7 @@ ggtitle("f) Normalized nestedness")+ theme(plot.title = element_text(size=18, fa
 
 ## Concluding remarks
 
-Overall, the total number of pollinators was higher after restoration practices along with key network descriptors such as connectance or normalized nestedness for both locations. In addition, in line with these results, the robustness to pollinator loss was higher in 2024. However, the networks showed lower number of floral resources, which have important implications for the robustness of the overall networks, as the loss of few species can lead more rapidly to the loss of pollinators, especially considering the higher number of partners per plants in the year 2024. The fact that networks are more connected in 2024 could be due to a lower plant:pollinator ratio, which results in more connected networks, or in other words, a higher number of partners per species. Thus, while restoration practices may have increased pollinator diversity, the lower number of floral resources could threaten these ongoing conservation efforts.
+Overall, the total number of pollinators was higher after restoration practices along with key network descriptors such as connectance or normalized nestedness for both locations. However, it is worth noting that the accumulation curves of species richness and interactions does not saturate, likely indicating that further sampling effort to characterize the full plant-pollinator communities may be needed. In addition, in line with these results, the robustness to pollinator loss was higher in 2024. However, the networks showed lower number of floral resources, which have important implications for the robustness of the overall networks, as the loss of few species can lead more rapidly to the loss of pollinators. The fact that networks are more connected and slightly less specialized in 2024 could be due to a lower plant:pollinator ratio, resulting in a higher number of partners per plant species, more connected networks and lower chances of being selective for pollinators. Thus, while restoration practices may have increased pollinator diversity, the lower number of floral resources could threaten these ongoing conservation efforts.
 
 \newpage
 
