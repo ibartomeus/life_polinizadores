@@ -1,0 +1,23 @@
+---
+title: "Untitled"
+output:
+  pdf_document: default
+  html_document: default
+date: "2025-01-21"
+---
+
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10, fig.cap="\\textbf{Figure 2.} Rarefied species accumulation curves across sampling rounds in Cantavieja and Ejea de los Caballeros. The solid line indicates the rarefied number of species per sampling round, the dot represents the observed number of species, and the dashed line shows the extrapolated number of species if additional rounds were conducted."}
+
+library(ggplot2)
+library(patchwork)
+
+
+p1 = readRDS("../Data/cantavieja_sampling_curve.rds")
+p2 = readRDS("../Data/ejea_sampling_curve.rds")
+
+
+(p1 + p2) & theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
+  axis.title = element_text(size=14),
+                axis.text = element_text(size=12))
+
+```

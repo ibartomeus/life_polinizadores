@@ -233,7 +233,7 @@ p2 = ggplot(ejea_rarefaction, aes(x = t, y = qD, group = Year)) +
 
 library(patchwork)
 library(cowplot)
-
+p1+p2
 #save plots
 saveRDS(p1, "Data/cantavieja_sampling_curve.rds")
 saveRDS(p2, "Data/ejea_sampling_curve.rds")

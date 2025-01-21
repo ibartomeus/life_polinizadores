@@ -73,12 +73,23 @@ knitr::include_graphics('../Images/Sampling_sites.png')
 
 ### \textcolor{gray}{Species Richness and Interactions}
 
-In this section, we first described the species accumulation curves per location and year. For this, we used rarefaction analysis to compare the number of observed species at equal number of sampling rounds. Thus, several species accumulation curves are created by randomly selecting each sampling round, and then calculating the mean of all these curves. Cantavieja and Ejea de los Caballeros showed a higher number of pollinator species in 2024. (**Figure 3**). However, the difference between years was only particularly pronounced for Ejea de los Caballeros.
+In this section, we focus in understanding how species richness and interactions changes over time in both locations. Specifically, this section contains:
+
+- (i) Rarefied accumulation curves of pollinator species and unique interactions per location and year to compare the number of observed species and interactions at equal number of sampling rounds (**Figures 2 and 3, respectively**).
+
+- (ii) Comparison of plant and pollinator degree distributions per location and year (**Figure 4**).
+
+- (iii) Comparison of plant and pollinator richness over time per location and year (**Figure 5**).
+
+
+First, we observe that the rarefied accumulation curve of pollinators shows a non-saturating pattern, indicating that further sampling is needed to fully document the pollinator community of Cantavieja and Ejea de los Caballeros. The number of pollinators was higher in 2024 for both locations, but the difference was especially marked for Ejea de los Caballeros.
 
 
 ```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10, fig.cap="\\textbf{Figure 2.} Rarefied species accumulation curves across sampling rounds in Cantavieja and Ejea de los Caballeros. The solid line indicates the rarefied number of species per sampling round, the dot represents the observed number of species, and the dashed line shows the extrapolated number of species if additional rounds were conducted."}
 
 library(ggplot2)
+library(dplyr)
+library(stringr)
 
 p1 = readRDS("../Data/cantavieja_sampling_curve.rds")
 p2 = readRDS("../Data/ejea_sampling_curve.rds")
@@ -96,85 +107,10 @@ p1 + p2
 ```
 
 
-Second, we compared the number of observed pollinator and plant species per location and year. As showed in **Figure 3**, both Cantavieja and Ejea de los Caballeros showed more pollinator species in the year 2024 (**Figure 4**). However, the number of observed plant species was higher in 2021 for both locations. 
-
-```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10, fig.cap="\\textbf{Figure 3.} Pollinator and plant richness in Cantavieja and Ejea de los Caballeros for the sampling periods 2021 and 2024."}
-
-#Read data from 2021 and 2024
-#First,load libraries
-library(dplyr)
-library(reshape2)
-library(stringr)
-library(ggplot2)
-#Read data
-data_2021 = read.csv("../Data/life_polinizadores_2021.csv")
-data_2024 = read.csv("../Data/life_polinizadores_2024.csv")
-#Combine data
-all_data = bind_rows(data_2021, data_2024)
-#Rename ejea caballeros to only ejea
-all_data = all_data %>%
-mutate(site_id = if_else(site_id == "ejea caballeros",
-                "ejea", site_id))
-
-#Delete leading and trailing spaces in spp names
-all_data = all_data %>%
-mutate(pollinators = trimws(pollinators)) %>%
-mutate(plants = trimws(plants))
-
-#Create a site_id label with year
-#and select only cols of interest
-main_cols = all_data %>%
-mutate(locality = site_id) %>%
-mutate(date = paste(day,month,year,transect, sep = "_")) %>%
-mutate(site_id = paste0(site_id, "_" ,year)) %>%
-mutate(site_id = str_replace_all(site_id, " ", "_")) %>%
-select(locality, site_id, date, transect,  plants, pollinators)
-
-#Get number of species of plants and pollinators
-#per location and year (site_id has already year on it)
-n_spp = main_cols %>%
-group_by(site_id) %>%
-summarise(n_pollinators = n_distinct(pollinators),
-          n_plants = n_distinct(plants))
-
-n_spp$site = c("Cantavieja", "Cantavieja","Ejea", "Ejea")
-n_spp$Year = c("2021", "2024","2021", "2024")
-
-p1 = n_spp %>%
-ggplot(aes(site, n_pollinators, fill = Year), group = Year) +
-geom_col(position = "dodge", alpha=0.9) +
-scale_fill_manual(values = c("black", "tomato4")) +
-theme_bw() +
-coord_cartesian(expand = FALSE) +
-xlab(NULL) +
-ylab("Species") +
-ggtitle("Pollinators")+ theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
-                axis.title = element_text(size=14),
-                axis.text = element_text(size=12))
+Second, the rarefied accumulation curve of unique interactions was calculated for each location and year. Note that _Apis mellifera_ was excluded, as their individuals do not directly respond to the applied restoration practices. An example of unique interaction is the visit of _Amegilla quadrifasciata_ on _Eryngium campestre_, which was observed in both locations. Here, we observed similar patterns to the ones observed for the accumulation curve of pollinator species, where Cantavieja shows little differences between years but Ejea de los Caballeros shows notably more unique interactions for the year 2024.
 
 
-p2 = n_spp %>%
-ggplot(aes(site, n_plants, fill = Year), group = Year) +
-geom_col(position = "dodge", alpha=0.9) +
-scale_fill_manual(values = c("black", "tomato4")) +
-theme_bw() +
-coord_cartesian(expand = FALSE) +
-xlab(NULL) +
-ylab("Species") +
-ggtitle("Plants")+ theme(plot.title = element_text(size=18, face= "bold"), panel.border = element_rect(size=1.3),
-                axis.title = element_text(size=14),
-                axis.text = element_text(size=12))
-
-library(patchwork)
-p1+p2
-
-
-```
-
-Third, the rarefied accumulation curve of unique interactions was calculated for each location and year. Note that _Apis mellifera_ was excluded, as their individuals do not directly respond to the applied restoration practices. An example of unique interaction is the visit of _Amegilla quadrifasciata_ on _Eryngium campestre_, which was observed in both locations. Here, we observed similar patterns to the ones observed for the accumulation curve of pollinator species, where Cantavieja shows little differences between years but Ejea de los Caballeros shows notably more unique interactions for the year 2024.
-
-
-```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10, fig.cap="\\textbf{Figure 4.} Comparison of the rarefied number of unique interactions across years in Cantavieja and Ejea de los Caballeros. Note that \\textit{Apis mellifera} were excluded from this analysis."}
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10, fig.cap="\\textbf{Figure 3.} Comparison of the rarefied number of unique interactions across years in Cantavieja and Ejea de los Caballeros. Note that \\textit{Apis mellifera} were excluded from this analysis."}
 
 library(cowplot)
 library(ggplot2)
@@ -196,11 +132,10 @@ p1+ p2
 ```
 
 
-Fourth, we compared the degree distributions between the pollinator and plant communities of Cantavieja and Ejea de los Caballeros across different years. Pollinators exhibited a classical decaying distribution for ecological networks [@jordano2003], while plants had a more gradual decaying distribution. Pollinators did not show statistical differences between their distributions between years for both locations (Kruskal-Wallis _P_ > 0.05). However, plants had statistically different distributions for both locations (Kruskal-Wallis _P_ < 0.05).
+Third, we compared the degree distributions between the pollinator and plant communities of Cantavieja and Ejea de los Caballeros across different years. Pollinators exhibited a classical decaying distribution for ecological networks [@jordano2003], while plants had a more gradual decaying distribution. Pollinators did not show statistical differences between their distributions between years for both locations (Kruskal-Wallis _P_ > 0.05). However, plants had statistically different distributions for both locations (Kruskal-Wallis _P_ < 0.05).
 
 
-
-```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10,fig.height=8, fig.cap="\\textbf{Figure 5.} Comparison of the pollinator and plant degree distributions for Cantavieja and Ejea de los Caballeros between years."}
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10,fig.height=8, fig.cap="\\textbf{Figure 4.} Comparison of the pollinator and plant degree distributions for Cantavieja and Ejea de los Caballeros between years."}
 
 #Read data
 data_2021 = read.csv("../Data/life_polinizadores_2021.csv")
@@ -285,6 +220,164 @@ coord_cartesian(expand = FALSE)
 library(patchwork)
 
 p1/p2
+
+```
+
+Fourth, we evaluated how plant and pollinator richness changed over time. The number of observed pollinators, compared to plants, was higher on almost all sampling dates for both years. Ejea de los Caballeros showed notably higher pollinator richness across sampling dates in 2024 compared to the previous year while Cantavieja showed a similar pattern. Additionally, it is worth noting that the number of sampling days and the dates of sampling differed between the years.
+
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10,fig.height=8, fig.cap="\\textbf{Figure 5.} Comparison of the observed richness of plant and pollinator species per sampling date in Cantavieja and Ejea de los Caballeros for the years 2021 and 2024."}
+
+#Read data from 2021 and 2024
+#First,load libraries
+library(dplyr)
+library(reshape2)
+library(stringr)
+library(ggplot2)
+#Read data
+data_2021 = read.csv("../Data/life_polinizadores_2021.csv")
+data_2024 = read.csv("../Data/life_polinizadores_2024.csv")
+#Combine data
+all_data = bind_rows(data_2021, data_2024)
+#Rename ejea caballeros to only ejea
+all_data = all_data %>%
+mutate(site_id = if_else(site_id == "ejea caballeros",
+                "ejea", site_id))
+
+#Delete leading and trailing spaces in spp names
+all_data = all_data %>%
+mutate(pollinators = trimws(pollinators)) %>%
+mutate(plants = trimws(plants))
+
+#Create a plot of pollinators and plants per date
+main_cols = all_data %>%
+select(c(site_id,
+         day,
+         month,
+         year,
+         plants,
+         pollinators)) %>%
+mutate(date = as.Date(paste(year, month, day, sep = "-"),
+  format = "%Y-%m-%d"))
+
+#Count plant and pollinator species by date and site
+spp_date = main_cols %>%
+group_by(date, site_id, year) %>%
+summarise(Plants = n_distinct(plants),
+          Pollinators = n_distinct(pollinators))
+
+#Subset data by location
+library(tidyr)
+spp_date_ejea_2021 = spp_date %>%
+filter(site_id == "ejea" & year == "2021") %>%
+  pivot_longer(cols = c(Pollinators, Plants),
+               names_to = "Species",
+               values_to = "count")
+
+spp_date_ejea_2024 = spp_date %>%
+filter(site_id == "ejea" & year == "2024") %>%
+  pivot_longer(cols = c(Pollinators, Plants),
+               names_to = "Species",
+               values_to = "count")
+
+#Plot data by location
+library(scales)
+p1 = spp_date_ejea_2021 %>%
+ggplot(aes(date, count, fill = Species)) +
+geom_col(position = "dodge",width=6) +
+scale_fill_manual(values = c("azure4", "coral4")) +
+coord_cartesian(expand = FALSE) +
+ylab("Species") +
+ylim(0,55) +
+theme_bw() +
+xlab(NULL) +
+ggtitle("b) Ejea de los caballeros") +
+theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+scale_x_date(
+    limits = as.Date(c("2021-03-10", "2021-07-30")),
+    breaks = as.Date(c("2021-03-20","2021-04-20", "2021-05-20",
+                       "2021-06-20", "2021-07-20")),
+    labels = format(as.Date(c("2021-03-20","2021-04-20", "2021-05-20",
+                       "2021-06-20", "2021-07-20")),  "%d %b %Y"))
+
+#Plot data by location
+p2 = spp_date_ejea_2024 %>%
+ggplot(aes(date, count, fill = Species)) +
+geom_col(position = "dodge",width=6) +
+scale_fill_manual(values = c("azure4", "coral4")) +
+coord_cartesian(expand = FALSE) +
+ylab("Species") +
+ylim(0,55) +
+xlab("Date") +
+theme_bw()+
+scale_x_date(
+    limits = as.Date(c("2024-03-10", "2024-07-30")),
+    breaks = as.Date(c("2024-03-20","2024-04-20", "2024-05-20",
+                       "2024-06-20", "2024-07-20")),
+    labels = format(as.Date(c("2024-03-20","2024-04-20", "2024-05-20",
+                       "2024-06-20", "2024-07-20")),  "%d %b %Y"))
+
+#Repeat process for cantavieja
+spp_date_canta_2021 = spp_date %>%
+filter(site_id == "cantavieja" & year == "2021") %>%
+  pivot_longer(cols = c(Pollinators, Plants),
+               names_to = "Species",
+               values_to = "count")
+
+spp_date_canta_2024 = spp_date %>%
+filter(site_id == "cantavieja" & year == "2024") %>%
+  pivot_longer(cols = c(Pollinators, Plants),
+               names_to = "Species",
+               values_to = "count")
+
+#Plot data by location
+library(scales)
+
+p3 = spp_date_canta_2021 %>%
+ggplot(aes(date, count, fill = Species)) +
+geom_col(position = "dodge",width=6) +
+scale_fill_manual(values = c("azure4", "coral4")) +
+coord_cartesian(expand = FALSE) +
+ylab("Species") +
+ylim(0,55) +
+theme_bw() +
+xlab(NULL) +
+ggtitle("a) Cantavieja") +
+theme(plot.title = element_text(hjust = 0.5, face = "bold")) +
+scale_x_date(
+    limits = as.Date(c("2021-05-10", "2021-08-30")),
+    breaks = as.Date(c("2021-05-20",
+                       "2021-06-20", "2021-07-20", "2021-08-20")),
+    labels = format(as.Date(c("2021-05-20",
+                       "2021-06-20", "2021-07-20",
+                       "2021-08-20")),  "%d %b %Y"))
+#Plot data by location
+p4 = spp_date_canta_2024 %>%
+ggplot(aes(date, count, fill = Species)) +
+geom_col(position = "dodge",width=6) +
+scale_fill_manual(values = c("azure4", "coral4")) +
+coord_cartesian(expand = FALSE) +
+ylab("Species") +
+ylim(0,55) +
+xlab("Date") +
+theme_bw()+
+scale_x_date(
+    limits = as.Date(c("2024-05-10", "2024-08-30")),
+    breaks = as.Date(c("2024-05-20",
+                       "2024-06-20", "2024-07-20", "2024-08-20")),
+    labels = format(as.Date(c("2024-05-20",
+                       "2024-06-20", "2024-07-20",
+                       "2024-08-20")),  "%d %b %Y"))
+
+((p3 / p4) | (p1/p2)) + plot_layout(guides = "collect") &
+theme(legend.position = "bottom", 
+      plot.title = element_text(size=18, face= "bold"), 
+      panel.border = element_rect(size=1.3),
+      axis.title = element_text(size=14),
+       axis.text = element_text(size=10),
+      legend.text = element_text(size=14),
+      legend.title = element_text(size=16))
+
+
 
 ```
 
@@ -582,9 +675,7 @@ ggtitle("f) Normalized nestedness")+ theme(plot.title = element_text(size=18, fa
 
 ## Concluding remarks
 
-Overall, the total number of pollinators was higher after restoration practices along with key network descriptors such as connectance or normalized nestedness for both locations. However, it is worth noting that the accumulation curves of species richness and interactions does not saturate, likely indicating that further sampling effort to characterize the full plant-pollinator communities may be needed. In addition, in line with these results, the robustness to pollinator loss was higher in 2024. However, the networks showed lower number of floral resources, which have important implications for the robustness of the overall networks, as the loss of few species can lead more rapidly to the loss of pollinators. The fact that networks are more connected and slightly less specialized in 2024 could be due to a lower plant:pollinator ratio, resulting in a higher number of partners per plant species, more connected networks and lower chances of being selective for pollinators. Thus, while restoration practices may have increased pollinator diversity, the lower number of floral resources could threaten these ongoing conservation efforts.
-
-\newpage
+Overall, the total number of pollinators was higher after restoration practices along with key network descriptors such as connectance or normalized nestedness for both locations. However, it is worth noting that the accumulation curves of species richness and interactions does not saturate, likely indicating that further sampling effort to characterize the full plant-pollinator communities may be needed. The fact that sampling dates differed across years may affect the observed differences in plant and pollinator composition and interactions, as phenology is a key driver of plant-pollinator networks [@forrest2015; @peralta2020]. While robustness to pollinator loss was higher in 2024, the networks showed lower number of floral resources, which have important implications for the robustness of the overall networks, as the loss of few species can lead more rapidly to the loss of pollinators. The fact that networks are more connected and slightly less specialized in 2024 could be due to a lower plant:pollinator ratio, resulting in a higher number of partners per plant species, more connected networks and lower chances of being selective for pollinators. Thus, while restoration practices may have helped pollinator diversity, the level of sampling coverage and species phenology are key factors shaping these differences, and finer-scale data may be needed to uncover restoration effects.
 
 ## References
 

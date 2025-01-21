@@ -114,3 +114,32 @@ ggtitle("d) Robustness network-level")+ theme(plot.title = element_text(size=18,
 saveRDS(long_plants, "Data/robustness_plants.rds")
 saveRDS(long_pollinators, "Data/robustness_pollinators.rds")
 saveRDS(long_network, "Data/robustness_network.rds")
+
+
+can_2021_rob_plant = long_plants %>%
+filter(site == "cantavieja" & Year == "2021")
+can_2024_rob_plant = long_plants %>%
+filter(site == "cantavieja" & Year == "2024")
+eje_2021_rob_plant = long_plants %>%
+filter(site == "ejea" & Year == "2021")
+eje_2024_rob_plant = long_plants %>%
+filter(site == "ejea" & Year == "2024")
+
+
+can_2021_rob_poll = long_plants %>%
+filter(site == "cantavieja" & Year == "2021")
+can_2024_rob_poll = long_plants %>%
+filter(site == "cantavieja" & Year == "2024")
+eje_2021_rob_poll = long_plants %>%
+filter(site == "ejea" & Year == "2021")
+eje_2024_rob_poll = long_plants %>%
+filter(site == "ejea" & Year == "2024")
+
+can_2021_rob_net = long_plants %>%
+filter(site == "cantavieja" & Year == "2021")
+can_2024_rob_net = long_plants %>%
+filter(site == "cantavieja" & Year == "2024")
+eje_2021_rob_net = long_plants %>%
+filter(site == "ejea" & Year == "2021")
+eje_2024_rob_net = long_plants %>%
+filter(site == "ejea" & Year == "2024")
