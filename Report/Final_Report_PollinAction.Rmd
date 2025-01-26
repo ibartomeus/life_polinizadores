@@ -1,8 +1,10 @@
 ---
-title: "\\Large Effects of short-term restoration on plant-pollinator communities in Cantavieja and Ejea de los Caballeros"
+title: "\\Large Effects of short-term restoration on plant-pollinator communities
+  in Cantavieja and Ejea de los Caballeros"
 output:
-  pdf_document: default
+  word_document: default
   latex_engine: xelatex
+  pdf_document: default
 bibliography: ../references.bib
 linkcolor: Black
 urlcolor: Black
@@ -17,7 +19,7 @@ header-includes:
 - \captionsetup[figure]{labelformat=empty}
 - \usepackage{setspace}
 - \usepackage{titling}
-- \setlength{\droptitle}{-2.5cm}
+- "\\setlength{\\droptitle}{-2.5cm}"
 - \usepackage[style=apa]{biblatex}
 - \usepackage[labelformat = empty]{caption}
 - \usepackage{pdflscape}
@@ -61,7 +63,7 @@ All data manipulation and analyses were conducted in R version 4.1.2 [@R].
 
 Two distinct locations were monitored with different historical land-use and management in the region of Aragón (Spain): Cantavieja (40º 30' 44", N 0º 22' 59" W) at 1450m above sea level with a total of 30 plots and Ejea de los Caballeros (42º 01' 06" N, 1º 08' 53" W) at 350m. In each location, a total of 21 plots were monitored in 2021 and 2024. Plot size is 2m by 2m and they are randomly distributed within each location (see **Figure 1**). Importantly, since the start of the project vegetation has remained undisturbed without grazing or clearing. 
 
-Each plot was surveyed three times at the begining of the season, at the peak of flowering and at the end of the season. In each occasion, all plant-pollinator interactions observed were documented. Pollinator specimens not identified in the field were captured and identified in the lab.
+Each plot was surveyed three times: at the begining of the season, at the peak of flowering and at the end of the season. In each occasion, all plant-pollinator interactions observed were documented. Pollinator specimens not identified in the field were captured and identified in the lab.
 
 
 ```{r echo=FALSE, out.width='80%',fig.align='center',fig.cap="\\textbf{Figure 1.} Cantavieja (left) and Ejea de los Caballeros (right) locations, with the different sampling plots indicated by an orange square along with the plot identifier. The positions of the bee hives are shown with a white cross in both locations."}
@@ -132,7 +134,8 @@ p1+ p2
 ```
 
 
-Third, we compared the degree distributions between the pollinator and plant communities of Cantavieja and Ejea de los Caballeros across different years. Pollinators exhibited a classical decaying distribution for ecological networks [@jordano2003], while plants had a more gradual decaying distribution. Pollinators did not show statistical differences between their distributions between years for both locations (Kruskal-Wallis _P_ > 0.05). However, plants had statistically different distributions for both locations (Kruskal-Wallis _P_ < 0.05).
+Third, we compared the degree distributions between the pollinator and plant communities of Cantavieja and Ejea de los Caballeros across different years. Pollinators exhibited a classical decaying distribution for ecological networks [@jordano2003], while plants had a more gradual decaying distribution. Pollinators did not show statistical differences between their distributions between years for both locations (Kruskal-Wallis _P_ > 0.05). However, plants had statistically different distributions for both locations (Kruskal-Wallis _P_ < 0.05). For plants, 2024 show a more even distribution of their interactions across plant species, indicating that the number of plants attracting many different pollinators has increased.
+
 
 
 ```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10,fig.height=8, fig.cap="\\textbf{Figure 4.} Comparison of the pollinator and plant degree distributions for Cantavieja and Ejea de los Caballeros between years."}
@@ -672,10 +675,14 @@ ggtitle("f) Normalized nestedness")+ theme(plot.title = element_text(size=18, fa
 ```
 
 
+Our results show that plant-pollinator networks increased in connectance and degree of nestedness. These two properties are important because they are associated with the stability of the communities. In contrast, the networks did not change their degree of specialization, and the robustness to in silico extinctions showed mixed results, depending on which species went extinct, but with small effects in general.
+
 
 ## Concluding remarks
 
 Overall, the total number of pollinators was higher after restoration practices along with key network descriptors such as connectance or normalized nestedness for both locations. However, it is worth noting that the accumulation curves of species richness and interactions does not saturate, likely indicating that further sampling effort to characterize the full plant-pollinator communities may be needed. The fact that sampling dates differed across years may affect the observed differences in plant and pollinator composition and interactions, as phenology is a key driver of plant-pollinator networks [@forrest2015; @peralta2020]. While robustness to pollinator loss was higher in 2024, the networks showed lower number of floral resources, which have important implications for the robustness of the overall networks, as the loss of few species can lead more rapidly to the loss of pollinators. The fact that networks are more connected and slightly less specialized in 2024 could be due to a lower plant:pollinator ratio, resulting in a higher number of partners per plant species, more connected networks and lower chances of being selective for pollinators. Thus, while restoration practices may have helped pollinator diversity, the level of sampling coverage and species phenology are key factors shaping these differences, and finer-scale data may be needed to uncover restoration effects.
+
+\newpage
 
 ## References
 
