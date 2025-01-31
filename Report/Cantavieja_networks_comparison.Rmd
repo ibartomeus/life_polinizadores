@@ -1,0 +1,171 @@
+---
+output: pdf_document
+---
+
+
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="100%", fig.width=22,fig.height=20, fig.cap=""}
+
+
+library(ggraph)
+library(dplyr)
+
+#Sample data setup to demonstrate the functionality
+#Load data
+matrices_list = readRDS("../Data/matrices_list.rds")
+canta_matrix_2021 <- matrices_list[[3]]
+canta_matrix_2021 <- t(canta_matrix_2021)
+
+# Calculate row and column degrees
+row_degrees <- rowSums(canta_matrix_2021 > 0)
+col_degrees <- colSums(canta_matrix_2021 > 0)
+
+# Order rows and columns
+ordered_rows <- order(row_degrees, decreasing = TRUE)
+ordered_columns <- order(col_degrees, decreasing = TRUE)
+
+# Reorder matrix based on degrees
+ordered_canta_matrix <- canta_matrix_2021[ordered_rows, ordered_columns]
+rownames(ordered_canta_matrix) <- rownames(canta_matrix_2021)[ordered_rows]
+colnames(ordered_canta_matrix) <- colnames(canta_matrix_2021)[ordered_columns]
+
+# Create weights tibble
+weights <- tibble(
+  weight = c(col_degrees[ordered_columns], row_degrees[ordered_rows]),
+  name = c(colnames(ordered_canta_matrix), rownames(ordered_canta_matrix)),
+  trophic = c(rep("2", length(col_degrees[ordered_columns])), rep("1", length(row_degrees[ordered_rows]))) # Trophic levels
+)
+
+# Create layout for the bipartite graph
+layout <- create_layout(ordered_canta_matrix, "bipartite") %>%
+  mutate(position = ifelse(y > 0, "upper", "lower"))
+
+layout <- left_join(layout, weights, by = "name")
+
+layout_false = layout %>%
+filter(type=="FALSE")
+layout_true = layout %>%
+filter(type=="TRUE")
+
+x_ordered_false = arrange(layout_false,x)
+x_ordered_true = arrange(layout_true, x)
+n_polls=layout_false %>% nrow(.) 
+n_plants=layout_true %>% nrow(.)
+max_counts = max(c(n_polls, n_plants))
+
+result_sequence_polls <- seq(from = 1, to = max_counts+200, length.out = n_polls)
+result_sequence_plants <- seq(from = 1, to = max_counts+200, length.out = n_plants)
+
+layout_false$x = result_sequence_polls
+layout_true$x = result_sequence_plants
+#layout_false$x = x_ordered_false$x
+#layout_true$x = x_ordered_true$x
+
+layout = bind_rows(layout_false, layout_true)
+
+# Construct the ggraph
+p1 = ggraph(layout) +
+  geom_edge_link0(aes(edge_width = weight), edge_colour = "grey66") +
+  geom_node_point(aes(shape = trophic, colour = trophic, size = weight)) +  # Use 'weight' for size
+  geom_node_text(aes(label = name,
+                     hjust = ifelse(position == "upper", 0, 1)),
+                 size = 6, angle = 90, vjust = 0.5, colour = "black") +
+  scale_colour_manual(values = c("darkorange3", "seagreen")) +
+  scale_shape_manual(values = c(19, 19)) +
+  scale_size_continuous(range = c(5, 15)) +
+  scale_edge_width(range = c(0.5, 4.5)) +
+  theme(
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    panel.border = element_blank(),
+    plot.background = element_blank(),
+    legend.position = "none",
+    plot.margin = margin(t = 200, r = 10, b = 200, l = 10),
+    plot.title = element_text(vjust=40, face = "bold", size=22)
+  ) +
+  coord_cartesian(expand = FALSE, clip = "off") +
+  ggtitle("Ejea 2021") 
+
+#Cantavieja 2024
+canta_matrix_2024 = matrices_list[[4]]
+
+canta_matrix_2024 <- t(canta_matrix_2024)
+
+# Calculate row and column degrees
+row_degrees <- rowSums(canta_matrix_2024 > 0)
+col_degrees <- colSums(canta_matrix_2024 > 0)
+
+# Order rows and columns
+ordered_rows <- order(row_degrees, decreasing = TRUE)
+ordered_columns <- order(col_degrees, decreasing = TRUE)
+
+# Reorder matrix based on degrees
+ordered_canta_matrix <- canta_matrix_2024[ordered_rows, ordered_columns]
+rownames(ordered_canta_matrix) <- rownames(canta_matrix_2024)[ordered_rows]
+colnames(ordered_canta_matrix) <- colnames(canta_matrix_2024)[ordered_columns]
+
+# Create weights tibble
+weights <- tibble(
+  weight = c(col_degrees[ordered_columns], row_degrees[ordered_rows]),
+  name = c(colnames(ordered_canta_matrix), rownames(ordered_canta_matrix)),
+  trophic = c(rep("2", length(col_degrees[ordered_columns])), rep("1", length(row_degrees[ordered_rows]))) # Trophic levels
+)
+
+# Create layout for the bipartite graph
+layout <- create_layout(ordered_canta_matrix, "bipartite") %>%
+  mutate(position = ifelse(y > 0, "upper", "lower"))
+
+layout <- left_join(layout, weights, by = "name")
+
+layout_false = layout %>%
+filter(type=="FALSE")
+layout_true = layout %>%
+filter(type=="TRUE")
+
+x_ordered_false = arrange(layout_false,x)
+x_ordered_true = arrange(layout_true, x)
+n_polls=layout_false %>% nrow(.) 
+n_plants=layout_true %>% nrow(.)
+max_counts = max(c(n_polls, n_plants))
+
+result_sequence_polls <- seq(from = 1, to = max_counts+200, length.out = n_polls)
+result_sequence_plants <- seq(from = 1, to = max_counts+200, length.out = n_plants)
+
+layout_false$x = result_sequence_polls
+layout_true$x = result_sequence_plants
+#layout_false$x = x_ordered_false$x
+#layout_true$x = x_ordered_true$x
+
+layout = bind_rows(layout_false, layout_true)
+
+# Construct the ggraph
+p2 = ggraph(layout) +
+  geom_edge_link0(aes(edge_width = weight), edge_colour = "grey66") +
+  geom_node_point(aes(shape = trophic, colour = trophic, size = weight)) +  # Use 'weight' for size
+  geom_node_text(aes(label = name,
+                     hjust = ifelse(position == "upper", 0, 1)),
+                 size = 6, angle = 90, vjust = 0.5, colour = "black") +
+  scale_colour_manual(values = c("darkorange3", "seagreen")) +
+  scale_shape_manual(values = c(19, 19)) +
+  scale_size_continuous(range = c(5, 15)) +
+  scale_edge_width(range = c(0.5, 4.5)) +
+  theme(
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    panel.border = element_blank(),
+    plot.background = element_blank(),
+    legend.position = "none",
+    plot.margin = margin(t = 200, r = 10, b = 200, l = 10),
+    plot.title = element_text(vjust=45, face="bold", size = 22)
+  ) +
+  coord_cartesian(expand = FALSE, clip = "off") +
+  ggtitle("Ejea 2024") 
+
+library(patchwork)
+
+p1 / p2
+
+
+
+
+```
+

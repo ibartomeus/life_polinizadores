@@ -75,7 +75,7 @@ knitr::include_graphics('../Images/Sampling_sites.png')
 
 ### \textcolor{gray}{Species Richness and Interactions}
 
-In this section, we focus in understanding how species richness and interactions changes over time in both locations. Specifically, this section contains:
+In this section, we focus on understanding how species richness and interactions change over time in both locations. Specifically, this section contains:
 
 - (i) Rarefied accumulation curves of pollinator species and unique interactions per location and year to compare the number of observed species and interactions at equal number of sampling rounds (**Figures 2 and 3, respectively**).
 
@@ -425,11 +425,11 @@ select(locality, site_id, year, date, transect,  plants, pollinators)
 #per location and year (site_id has already year on it)
 n_spp_poll = main_cols %>%
 group_by(locality, year) %>%
-filter(!str_detect(pollinators, " sp"))  %>% 
+#filter(!str_detect(pollinators, " sp"))  %>% 
 summarise(n_pollinators = n_distinct(pollinators))
 n_spp_plant = main_cols %>%
 group_by(locality, year) %>%
-filter(!str_detect(plants, " sp"))  %>% 
+#filter(!str_detect(plants, " sp"))  %>% 
 summarise(n_plants= n_distinct(plants))
 #Bind both datasets
 n_spp = left_join(n_spp_poll, n_spp_plant)
@@ -552,15 +552,348 @@ Network-level specialization, connectance, and robustness were calculated using 
 
 **Cantavieja**
 
-Cantavieja had `r can_2021$n_pollinators` pollinators and `r can_2021$n_plants` plant species in 2021 and `r can_2024$n_pollinators` pollinators and `r can_2024$n_plants` plants in 2024. The total number of recorded interactions was `r can_2021_int$Interactions` in 2021 and `r can_2024_int$Interactions` in 2024. The level of network specialization was slightly higher in 2021 (H2' = `r round(can_net_2021$H2,2)` than in 2024 (H2' = `r round(can_net_2024$H2,2)`), while connectance was notably higher in 2024 (C = `r round(can_net_2024$Connectance,2)`) than in 2021 (C = `r round(can_net_2021$Connectance,2)`). Robustness to plant loss was `r round(can_2021_rob_plant$Robustness,2)` in 2021 and `r round(can_2024_rob_plant$Robustness,2)` in 2024, robustness to pollinator loss was `r round(can_2021_rob_poll$Robustness,2)` in 2021 and `r round(can_2024_rob_poll$Robustness,2)` in 2024, and robustness at the network level was `r round(can_2021_rob_net$Robustness,2)` in 2021 and `r round(can_2024_rob_net$Robustness,2)` in 2024. Nomalized nestedness showed the opposite trend to network robustness, with `r round(can_2021_nest$temperature,2)` in 2021 and `r round(can_2024_nest$temperature,2)` in 2024.
+Cantavieja had `r can_2021$n_pollinators` pollinators and `r can_2021$n_plants` plant species in 2021 and `r can_2024$n_pollinators` pollinators and `r can_2024$n_plants` plants in 2024. Note that these numbers include some individuals identified only to the genus level; however, they likely reflect distinct species, as there are generally no records of these genera (4 pollinators and 9 plants in 2021 and 5 pollinators and plants in 2025). The total number of recorded interactions was `r can_2021_int$Interactions` in 2021 and `r can_2024_int$Interactions` in 2024 (**Figure S6** for network comparisons). The level of network specialization was slightly higher in 2021 (H2' = `r round(can_net_2021$H2,2)` than in 2024 (H2' = `r round(can_net_2024$H2,2)`), while connectance was notably higher in 2024 (C = `r round(can_net_2024$Connectance,2)`) than in 2021 (C = `r round(can_net_2021$Connectance,2)`). Robustness to plant loss was `r round(can_2021_rob_plant$Robustness,2)` in 2021 and `r round(can_2024_rob_plant$Robustness,2)` in 2024, robustness to pollinator loss was `r round(can_2021_rob_poll$Robustness,2)` in 2021 and `r round(can_2024_rob_poll$Robustness,2)` in 2024, and robustness at the network level was `r round(can_2021_rob_net$Robustness,2)` in 2021 and `r round(can_2024_rob_net$Robustness,2)` in 2024. Nomalized nestedness showed the opposite trend to network robustness, with `r round(can_2021_nest$temperature,2)` in 2021 and `r round(can_2024_nest$temperature,2)` in 2024. **Figure S8** and **Table 1** provide a summary of these findings.
+
+
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="90%", fig.width=20,fig.height=20, fig.cap="\\textbf{Figure 6.} Bipartite plant-pollinator networks from Cantavieja. The top graph shows the network for the year 2021, while the bottom graph depicts the network for 2024, highlighting changes in species interactions and species composition between years."}
+
+
+library(ggraph)
+library(dplyr)
+
+#Sample data setup to demonstrate the functionality
+#Load data
+matrices_list = readRDS("../Data/matrices_list.rds")
+canta_matrix_2021 <- matrices_list[[1]]
+canta_matrix_2021 <- t(canta_matrix_2021)
+
+# Calculate row and column degrees
+row_degrees <- rowSums(canta_matrix_2021 > 0)
+col_degrees <- colSums(canta_matrix_2021 > 0)
+
+# Order rows and columns
+ordered_rows <- order(row_degrees, decreasing = TRUE)
+ordered_columns <- order(col_degrees, decreasing = TRUE)
+
+# Reorder matrix based on degrees
+ordered_canta_matrix <- canta_matrix_2021[ordered_rows, ordered_columns]
+rownames(ordered_canta_matrix) <- rownames(canta_matrix_2021)[ordered_rows]
+colnames(ordered_canta_matrix) <- colnames(canta_matrix_2021)[ordered_columns]
+
+# Create weights tibble
+weights <- tibble(
+  weight = c(col_degrees[ordered_columns], row_degrees[ordered_rows]),
+  name = c(colnames(ordered_canta_matrix), rownames(ordered_canta_matrix)),
+  trophic = c(rep("2", length(col_degrees[ordered_columns])), rep("1", length(row_degrees[ordered_rows]))) # Trophic levels
+)
+
+# Create layout for the bipartite graph
+layout <- create_layout(ordered_canta_matrix, "bipartite") %>%
+  mutate(position = ifelse(y > 0, "upper", "lower"))
+
+layout <- left_join(layout, weights, by = "name")
+
+layout_false = layout %>%
+filter(type=="FALSE")
+layout_true = layout %>%
+filter(type=="TRUE")
+
+x_ordered_false = arrange(layout_false,x)
+x_ordered_true = arrange(layout_true, x)
+n_polls=layout_false %>% nrow(.) 
+n_plants=layout_true %>% nrow(.)
+max_counts = max(c(n_polls, n_plants))
+
+result_sequence_polls <- seq(from = 1, to = max_counts+200, length.out = n_polls)
+result_sequence_plants <- seq(from = 1, to = max_counts+200, length.out = n_plants)
+
+layout_false$x = result_sequence_polls
+layout_true$x = result_sequence_plants
+#layout_false$x = x_ordered_false$x
+#layout_true$x = x_ordered_true$x
+
+layout = bind_rows(layout_false, layout_true)
+
+# Construct the ggraph
+p1 = ggraph(layout) +
+  geom_edge_link0(aes(edge_width = weight), edge_colour = "grey66") +
+  geom_node_point(aes(shape = trophic, colour = trophic, size = weight)) +  # Use 'weight' for size
+  geom_node_text(aes(label = name,
+                     hjust = ifelse(position == "upper", 0, 1)),
+                 size = 6, angle = 90, vjust = 0.5, colour = "black") +
+  scale_colour_manual(values = c("darkorange3", "seagreen")) +
+  scale_shape_manual(values = c(19, 19)) +
+  scale_size_continuous(range = c(5, 15)) +
+  scale_edge_width(range = c(0.5, 4.5)) +
+  theme(
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    panel.border = element_blank(),
+    plot.background = element_blank(),
+    legend.position = "none",
+    plot.margin = margin(t = 200, r = 10, b = 200, l = 10),
+    plot.title = element_text(vjust=40, face = "bold", size=22)
+  ) +
+  coord_cartesian(expand = FALSE, clip = "off") +
+  ggtitle("Cantavieja 2021") 
+
+#Cantavieja 2024
+canta_matrix_2024 = matrices_list[[2]]
+
+canta_matrix_2024 <- t(canta_matrix_2024)
+
+# Calculate row and column degrees
+row_degrees <- rowSums(canta_matrix_2024 > 0)
+col_degrees <- colSums(canta_matrix_2024 > 0)
+
+# Order rows and columns
+ordered_rows <- order(row_degrees, decreasing = TRUE)
+ordered_columns <- order(col_degrees, decreasing = TRUE)
+
+# Reorder matrix based on degrees
+ordered_canta_matrix <- canta_matrix_2024[ordered_rows, ordered_columns]
+rownames(ordered_canta_matrix) <- rownames(canta_matrix_2024)[ordered_rows]
+colnames(ordered_canta_matrix) <- colnames(canta_matrix_2024)[ordered_columns]
+
+# Create weights tibble
+weights <- tibble(
+  weight = c(col_degrees[ordered_columns], row_degrees[ordered_rows]),
+  name = c(colnames(ordered_canta_matrix), rownames(ordered_canta_matrix)),
+  trophic = c(rep("2", length(col_degrees[ordered_columns])), rep("1", length(row_degrees[ordered_rows]))) # Trophic levels
+)
+
+# Create layout for the bipartite graph
+layout <- create_layout(ordered_canta_matrix, "bipartite") %>%
+  mutate(position = ifelse(y > 0, "upper", "lower"))
+
+layout <- left_join(layout, weights, by = "name")
+
+layout_false = layout %>%
+filter(type=="FALSE")
+layout_true = layout %>%
+filter(type=="TRUE")
+
+x_ordered_false = arrange(layout_false,x)
+x_ordered_true = arrange(layout_true, x)
+n_polls=layout_false %>% nrow(.) 
+n_plants=layout_true %>% nrow(.)
+max_counts = max(c(n_polls, n_plants))
+
+result_sequence_polls <- seq(from = 1, to = max_counts+200, length.out = n_polls)
+result_sequence_plants <- seq(from = 1, to = max_counts+200, length.out = n_plants)
+
+layout_false$x = result_sequence_polls
+layout_true$x = result_sequence_plants
+#layout_false$x = x_ordered_false$x
+#layout_true$x = x_ordered_true$x
+
+layout = bind_rows(layout_false, layout_true)
+
+# Construct the ggraph
+p2 = ggraph(layout) +
+  geom_edge_link0(aes(edge_width = weight), edge_colour = "grey66") +
+  geom_node_point(aes(shape = trophic, colour = trophic, size = weight)) +  # Use 'weight' for size
+  geom_node_text(aes(label = name,
+                     hjust = ifelse(position == "upper", 0, 1)),
+                 size = 6, angle = 90, vjust = 0.5, colour = "black") +
+  scale_colour_manual(values = c("darkorange3", "seagreen")) +
+  scale_shape_manual(values = c(19, 19)) +
+  scale_size_continuous(range = c(5, 15)) +
+  scale_edge_width(range = c(0.5, 4.5)) +
+  theme(
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    panel.border = element_blank(),
+    plot.background = element_blank(),
+    legend.position = "none",
+    plot.margin = margin(t = 200, r = 10, b = 200, l = 10),
+    plot.title = element_text(vjust=40, face="bold", size = 22)
+  ) +
+  coord_cartesian(expand = FALSE, clip = "off") +
+  ggtitle("Cantavieja 2024") 
+
+library(patchwork)
+
+p1 / p2
+
+
+```
+
 
 **Ejea de los Caballeros**
 
-Ejea de los Caballeros had `r eje_2021$n_pollinators` pollinators and `r eje_2021$n_plants` plant species in 2021 and `r eje_2024$n_plants` pollinators and `r eje_2024$n_plants` plants in 2024. The total number of recorded interactions was `r eje_2021_int$Interactions` in 2021 and `r eje_2024_int$Interactions` in 2024.  The level of network specialization was slightly higher in 2021 (H2' = `r round(eje_net_2021$H2,2)` than in 2024 (H2' = `r round(eje_net_2024$H2,2)`), while connectance was also slightly higher in 2024 (C = `r round(eje_net_2024$Connectance,2)`) than in 2021 (C = `r round(eje_net_2021$Connectance,2)`). Robustness to plant loss was `r round(eje_2021_rob_plant$Robustness,2)` in 2021 and `r round(eje_2024_rob_plant$Robustness,2)` in 2024, robustness to pollinator loss was `r round(eje_2021_rob_poll$Robustness,2)` in 2021 and `r round(eje_2024_rob_poll$Robustness,2)` in 2024, and robustness at the network level was `r round(eje_2021_rob_net$Robustness,2)`  in 2021 and `r round(eje_2024_rob_net$Robustness,2)`  in 2024. Nomalized nestedness showed the opposite trend to network robustness, with `r round(eje_2021_nest$temperature,2)` in 2021 and `r round(eje_2024_nest$temperature,2)` in 2024.
+Ejea de los Caballeros had `r eje_2021$n_pollinators` pollinators and `r eje_2021$n_plants` plant species in 2021 and `r eje_2024$n_pollinators` pollinators and `r eje_2024$n_plants` plants in 2024. Note that these numbers include some individuals identified only to the genus level; however, they likely reflect distinct species, as there are generally no records of these genera (7 pollinators and 6 plants 2021 and 12 pollinators and 5 plants in 2025). The total number of recorded interactions was `r eje_2021_int$Interactions` in 2021 and `r eje_2024_int$Interactions` in 2024 (**Figure S7** for network comparisons).  The level of network specialization was slightly higher in 2021 (H2' = `r round(eje_net_2021$H2,2)` than in 2024 (H2' = `r round(eje_net_2024$H2,2)`), while connectance was also slightly higher in 2024 (C = `r round(eje_net_2024$Connectance,2)`) than in 2021 (C = `r round(eje_net_2021$Connectance,2)`). Robustness to plant loss was `r round(eje_2021_rob_plant$Robustness,2)` in 2021 and `r round(eje_2024_rob_plant$Robustness,2)` in 2024, robustness to pollinator loss was `r round(eje_2021_rob_poll$Robustness,2)` in 2021 and `r round(eje_2024_rob_poll$Robustness,2)` in 2024, and robustness at the network level was `r round(eje_2021_rob_net$Robustness,2)`  in 2021 and `r round(eje_2024_rob_net$Robustness,2)`  in 2024. Nomalized nestedness showed the opposite trend to network robustness, with `r round(eje_2021_nest$temperature,2)` in 2021 and `r round(eje_2024_nest$temperature,2)` in 2024. **Figure S8** and **Table 1** provide a summary of these findings.
+
+
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="90%", fig.width=22,fig.height=20, fig.cap="\\textbf{Figure 7.} Bipartite plant-pollinator networks from Ejea de los Caballeros. The top graph shows the network for the year 2021, while the bottom graph depicts the network for 2024, highlighting changes in species interactions and species composition between years."}
+
+
+library(ggraph)
+library(dplyr)
+
+#Sample data setup to demonstrate the functionality
+#Load data
+matrices_list = readRDS("../Data/matrices_list.rds")
+canta_matrix_2021 <- matrices_list[[3]]
+canta_matrix_2021 <- t(canta_matrix_2021)
+
+# Calculate row and column degrees
+row_degrees <- rowSums(canta_matrix_2021 > 0)
+col_degrees <- colSums(canta_matrix_2021 > 0)
+
+# Order rows and columns
+ordered_rows <- order(row_degrees, decreasing = TRUE)
+ordered_columns <- order(col_degrees, decreasing = TRUE)
+
+# Reorder matrix based on degrees
+ordered_canta_matrix <- canta_matrix_2021[ordered_rows, ordered_columns]
+rownames(ordered_canta_matrix) <- rownames(canta_matrix_2021)[ordered_rows]
+colnames(ordered_canta_matrix) <- colnames(canta_matrix_2021)[ordered_columns]
+
+# Create weights tibble
+weights <- tibble(
+  weight = c(col_degrees[ordered_columns], row_degrees[ordered_rows]),
+  name = c(colnames(ordered_canta_matrix), rownames(ordered_canta_matrix)),
+  trophic = c(rep("2", length(col_degrees[ordered_columns])), rep("1", length(row_degrees[ordered_rows]))) # Trophic levels
+)
+
+# Create layout for the bipartite graph
+layout <- create_layout(ordered_canta_matrix, "bipartite") %>%
+  mutate(position = ifelse(y > 0, "upper", "lower"))
+
+layout <- left_join(layout, weights, by = "name")
+
+layout_false = layout %>%
+filter(type=="FALSE")
+layout_true = layout %>%
+filter(type=="TRUE")
+
+x_ordered_false = arrange(layout_false,x)
+x_ordered_true = arrange(layout_true, x)
+n_polls=layout_false %>% nrow(.) 
+n_plants=layout_true %>% nrow(.)
+max_counts = max(c(n_polls, n_plants))
+
+result_sequence_polls <- seq(from = 1, to = max_counts+200, length.out = n_polls)
+result_sequence_plants <- seq(from = 1, to = max_counts+200, length.out = n_plants)
+
+layout_false$x = result_sequence_polls
+layout_true$x = result_sequence_plants
+#layout_false$x = x_ordered_false$x
+#layout_true$x = x_ordered_true$x
+
+layout = bind_rows(layout_false, layout_true)
+
+# Construct the ggraph
+p1 = ggraph(layout) +
+  geom_edge_link0(aes(edge_width = weight), edge_colour = "grey66") +
+  geom_node_point(aes(shape = trophic, colour = trophic, size = weight)) +  # Use 'weight' for size
+  geom_node_text(aes(label = name,
+                     hjust = ifelse(position == "upper", 0, 1)),
+                 size = 6, angle = 90, vjust = 0.5, colour = "black") +
+  scale_colour_manual(values = c("darkorange3", "seagreen")) +
+  scale_shape_manual(values = c(19, 19)) +
+  scale_size_continuous(range = c(5, 15)) +
+  scale_edge_width(range = c(0.5, 4.5)) +
+  theme(
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    panel.border = element_blank(),
+    plot.background = element_blank(),
+    legend.position = "none",
+    plot.margin = margin(t = 200, r = 10, b = 200, l = 10),
+    plot.title = element_text(vjust=40, face = "bold", size=22)
+  ) +
+  coord_cartesian(expand = FALSE, clip = "off") +
+  ggtitle("Ejea 2021") 
+
+#Cantavieja 2024
+canta_matrix_2024 = matrices_list[[4]]
+
+canta_matrix_2024 <- t(canta_matrix_2024)
+
+# Calculate row and column degrees
+row_degrees <- rowSums(canta_matrix_2024 > 0)
+col_degrees <- colSums(canta_matrix_2024 > 0)
+
+# Order rows and columns
+ordered_rows <- order(row_degrees, decreasing = TRUE)
+ordered_columns <- order(col_degrees, decreasing = TRUE)
+
+# Reorder matrix based on degrees
+ordered_canta_matrix <- canta_matrix_2024[ordered_rows, ordered_columns]
+rownames(ordered_canta_matrix) <- rownames(canta_matrix_2024)[ordered_rows]
+colnames(ordered_canta_matrix) <- colnames(canta_matrix_2024)[ordered_columns]
+
+# Create weights tibble
+weights <- tibble(
+  weight = c(col_degrees[ordered_columns], row_degrees[ordered_rows]),
+  name = c(colnames(ordered_canta_matrix), rownames(ordered_canta_matrix)),
+  trophic = c(rep("2", length(col_degrees[ordered_columns])), rep("1", length(row_degrees[ordered_rows]))) # Trophic levels
+)
+
+# Create layout for the bipartite graph
+layout <- create_layout(ordered_canta_matrix, "bipartite") %>%
+  mutate(position = ifelse(y > 0, "upper", "lower"))
+
+layout <- left_join(layout, weights, by = "name")
+
+layout_false = layout %>%
+filter(type=="FALSE")
+layout_true = layout %>%
+filter(type=="TRUE")
+
+x_ordered_false = arrange(layout_false,x)
+x_ordered_true = arrange(layout_true, x)
+n_polls=layout_false %>% nrow(.) 
+n_plants=layout_true %>% nrow(.)
+max_counts = max(c(n_polls, n_plants))
+
+result_sequence_polls <- seq(from = 1, to = max_counts+200, length.out = n_polls)
+result_sequence_plants <- seq(from = 1, to = max_counts+200, length.out = n_plants)
+
+layout_false$x = result_sequence_polls
+layout_true$x = result_sequence_plants
+#layout_false$x = x_ordered_false$x
+#layout_true$x = x_ordered_true$x
+
+layout = bind_rows(layout_false, layout_true)
+
+# Construct the ggraph
+p2 = ggraph(layout) +
+  geom_edge_link0(aes(edge_width = weight), edge_colour = "grey66") +
+  geom_node_point(aes(shape = trophic, colour = trophic, size = weight)) +  # Use 'weight' for size
+  geom_node_text(aes(label = name,
+                     hjust = ifelse(position == "upper", 0, 1)),
+                 size = 6, angle = 90, vjust = 0.5, colour = "black") +
+  scale_colour_manual(values = c("darkorange3", "seagreen")) +
+  scale_shape_manual(values = c(19, 19)) +
+  scale_size_continuous(range = c(5, 15)) +
+  scale_edge_width(range = c(0.5, 4.5)) +
+  theme(
+    panel.grid = element_blank(),
+    panel.background = element_blank(),
+    panel.border = element_blank(),
+    plot.background = element_blank(),
+    legend.position = "none",
+    plot.margin = margin(t = 200, r = 10, b = 200, l = 10),
+    plot.title = element_text(vjust=45, face="bold", size = 22)
+  ) +
+  coord_cartesian(expand = FALSE, clip = "off") +
+  ggtitle("Ejea 2024") 
+
+library(patchwork)
+
+p1 / p2
 
 
 
-```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10,fig.height=8, fig.cap="\\textbf{Figure 6.} Comparison of network specialization (a), connectance (b), robustness to plant loss (c), robustness to pollinator loss (d), robustness at network level (e), and normalized nestedness (f) for Cantavieja and Ejea de los Caballeros across sampling years."}
+
+```
+
+
+
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="85%", fig.width=10,fig.height=8, fig.cap="\\textbf{Figure 8.} Comparison of network specialization (a), connectance (b), robustness to plant loss (c), robustness to pollinator loss (d), robustness at network level (e), and normalized nestedness (f) for Cantavieja and Ejea de los Caballeros across sampling years."}
 
 library(bipartite)
 library(purrr)
@@ -677,12 +1010,102 @@ ggtitle("f) Normalized nestedness")+ theme(plot.title = element_text(size=18, fa
 
 Our results show that plant-pollinator networks increased in connectance and degree of nestedness. These two properties are important because they are associated with the stability of the communities. In contrast, the networks did not change their degree of specialization, and the robustness to in silico extinctions showed mixed results, depending on which species went extinct, but with small effects in general.
 
+```{r echo=F, fig.align='center', message=FALSE, warning=FALSE, out.width="60%"}
+library(kableExtra) #to plot the tables
+
+data_2021 = read.csv("../Data/life_polinizadores_2021.csv")
+#Create table with spp
+pollinators_2021 = data_2021 %>%
+group_by(site_id, year) %>%
+summarise(Pollinators = n_distinct(pollinators))
+
+plants_2021 = data_2021 %>%
+group_by(site_id, year) %>%
+summarise(Plants = n_distinct(plants))
+
+spp_2021 = left_join(pollinators_2021, plants_2021)
+
+data_2024 = read.csv("../Data/life_polinizadores_2024.csv")
+#Create table with spp
+pollinators_2024 = data_2024 %>%
+group_by(site_id, year) %>%
+summarise(Pollinators = n_distinct(pollinators))
+
+plants_2024 = data_2024 %>%
+group_by(site_id, year) %>%
+summarise(Plants = n_distinct(plants))
+
+spp_2024 = left_join(pollinators_2024, plants_2024)
+
+#Now bind both years
+spp_year = bind_rows(spp_2021,spp_2024)
+
+table_1 = spp_year %>%
+  rename(Location = site_id) %>%
+  rename(Year = year) %>%
+  arrange(Location) %>%
+  mutate(Location = recode_factor(Location, "cantavieja" = "Cantavieja")) %>%
+  mutate(Location = recode_factor(Location, "ejea caballeros" = "Ejea"))
+
+#Add metrics
+matrices_list = readRDS("../Data/matrices_list.rds")
+
+#Calculate network descriptors
+library(bipartite)
+library(purrr)
+library(tidyr)
+#Compute specialization
+H2_results = map(matrices_list, H2fun, H2_integer=TRUE)
+network_h2 = bind_rows(H2_results, .id = "Site_id")
+network_h2 = network_h2 %>%
+select(Site_id, H2)
+#Compute connectance
+connectance_results = map(matrices_list, networklevel, index="connectance")
+network_connectance = bind_rows(connectance_results, .id = "Site_id")
+#Bind metric data
+metrics = left_join(network_h2,network_connectance)
+#Separate Site_id again for plotting
+connectance_nestedness = metrics %>%
+separate(Site_id, c("site", "Year"), "_") %>%
+mutate(site = str_to_title(site)) %>%
+rename(Connectance = connectance) %>%
+rename(Location =site) %>%
+mutate(Year =as.integer(Year))
+
+table_1 = left_join(table_1, connectance_nestedness)
+
+table_1 = table_1 %>% 
+rename(C = Connectance)
+
+#Prepare robustness data to load on markdown
+long_plants = readRDS("../Data/robustness_plants.rds")
+long_pollinators = readRDS("../Data/robustness_pollinators.rds")
+long_network = readRDS("../Data/robustness_network.rds")
+
+table_1$`Plant extinctions` = long_plants$Robustness
+table_1$`Poll. extinctions` = long_pollinators$Robustness
+table_1$`Robustness` = long_network$Robustness
+
+#Prepare nestedness to load data on markdown
+nestedness_tibble = readRDS("../Data/nestedness.rds")
+
+table_1$Nestedness = nestedness_tibble$temperature
+
+table_1 = table_1 %>% 
+rename("Polls." = "Pollinators")
+
+table_1 %>%
+  kbl("latex",longtable = T,digits = 3,align = "c", escape=FALSE,caption = "\\textbf{Table 1.} Summary of network descriptors for Cantavieja and Ejea de los Caballeros: Pollinator and plant richness, network specialization (H2'), connectance (C), robustness to plant extinctions, robustness to pollinator extinctions, network robustness, and normalized nestedness.") %>%
+  kable_styling(font_size = 9,latex_options = c("striped","repeat_header"), full_width = F, position = "left") %>% 
+row_spec(0, bold=T)
+
+
+```
+
 
 ## Concluding remarks
 
 Overall, the total number of pollinators was higher after restoration practices along with key network descriptors such as connectance or normalized nestedness for both locations. However, it is worth noting that the accumulation curves of species richness and interactions does not saturate, likely indicating that further sampling effort to characterize the full plant-pollinator communities may be needed. The fact that sampling dates differed across years may affect the observed differences in plant and pollinator composition and interactions, as phenology is a key driver of plant-pollinator networks [@forrest2015; @peralta2020]. While robustness to pollinator loss was higher in 2024, the networks showed lower number of floral resources, which have important implications for the robustness of the overall networks, as the loss of few species can lead more rapidly to the loss of pollinators. The fact that networks are more connected and slightly less specialized in 2024 could be due to a lower plant:pollinator ratio, resulting in a higher number of partners per plant species, more connected networks and lower chances of being selective for pollinators. Thus, while restoration practices may have helped pollinator diversity, the level of sampling coverage and species phenology are key factors shaping these differences, and finer-scale data may be needed to uncover restoration effects.
-
-\newpage
 
 ## References
 
